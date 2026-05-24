@@ -202,108 +202,258 @@
         </div>
 
         <!-- SKILLS & SUPPORT TAB -->
-        <div id="contentSkills" class="hidden space-y-4">        
-
-          <div class="space-y-2">
+        <div id="contentSkills" class="hidden space-y-4">
+          <!-- Support Gem Priorities Organised in visual Tier Containers -->
+          <div class="space-y-3">
             <h4 class="text-xs font-bold text-slate-300 uppercase tracking-wider border-b border-slate-800 pb-1">Support Gem Priority</h4>
-            <div class="space-y-2">              
-              
-              <div class="bg-slate-900 p-2.5 rounded border border-slate-800 text-xs">
-                <span class="font-bold text-emerald-400">Retreat I (Twisters)</span>
-                <ul class="list-disc list-inside text-slate-400 mt-1 space-y-0.5 pl-1">
-                  <li><strong class="text-slate-300">The Grelwood, Areagne</strong></li>
-                </ul>
+            
+            <!-- Tier 1 Supports -->
+            <div class="bg-slate-900/40 border border-slate-800 rounded-lg p-3 space-y-2">
+              <div class="flex items-center justify-between border-b border-slate-800 pb-1.5">
+                <span class="text-xs font-bold text-amber-500 uppercase tracking-wider flex items-center gap-1.5">
+                  
+                  Tier 1
+                </span>
               </div>
+              <div class="space-y-2">
+                <div id="card-gem-retreat1" class="bg-slate-950/60 p-2.5 rounded border border-slate-800 text-xs flex items-start space-x-2.5 transition duration-150 cursor-pointer hover:border-slate-600 select-none">
+                  <div class="flex items-center h-4 mt-0.5 shrink-0">
+                    <input type="checkbox" id="gem-retreat1" class="gem-checkbox w-4 h-4 rounded border-slate-700 text-amber-500 bg-slate-950 focus:ring-amber-500/25 cursor-pointer">
+                  </div>
+                  <div class="flex-1">
+                    <span class="font-bold text-emerald-400">Retreat I (Twisters)</span>
+                    <ul class="list-disc list-inside text-slate-400 mt-1 space-y-0.5 pl-1">
+                      <li><strong class="text-slate-300">The Grelwood, Areagne</strong></li>
+                    </ul>
+                  </div>
+                </div>
 
-              <div class="bg-slate-900 p-2.5 rounded border border-slate-800 text-xs">                
-                <span class="font-bold text-red-400">Rage I (Whirling Slash)</span>
-                <ul class="list-disc list-inside text-slate-400 mt-1 space-y-0.5 pl-1">
-                  <li><strong class="text-slate-300">Tomb of the Consort, Haunted Treasure</strong></li>
-                </ul>              
-              </div>
+                <div id="card-gem-rage1" class="bg-slate-950/60 p-2.5 rounded border border-slate-800 text-xs flex items-start space-x-2.5 transition duration-150 cursor-pointer hover:border-slate-600 select-none">                
+                  <div class="flex items-center h-4 mt-0.5 shrink-0">
+                    <input type="checkbox" id="gem-rage1" class="gem-checkbox w-4 h-4 rounded border-slate-700 text-amber-500 bg-slate-950 focus:ring-amber-500/25 cursor-pointer">
+                  </div>
+                  <div class="flex-1">
+                    <span class="font-bold text-red-400">Rage I (Whirling Slash)</span>
+                    <ul class="list-disc list-inside text-slate-400 mt-1 space-y-0.5 pl-1">
+                      <li><strong class="text-slate-300">Tomb of the Consort, Haunted Treasure</strong></li>
+                    </ul>              
+                  </div>
+                </div>
 
-              <div class="bg-slate-900 p-2.5 rounded border border-slate-800 text-xs">
-                <span class="font-bold text-emerald-400">Rapid Attacks I</span>
-                <ul class="list-disc list-inside text-slate-400 mt-1 space-y-0.5 pl-1">
-                  <li><strong class="text-slate-300">Ogham Village, The Executioner</strong></li>
-                </ul>
-              </div>
+                <div id="card-gem-rapid1" class="bg-slate-950/60 p-2.5 rounded border border-slate-800 text-xs flex items-start space-x-2.5 transition duration-150 cursor-pointer hover:border-slate-600 select-none">
+                  <div class="flex items-center h-4 mt-0.5 shrink-0">
+                    <input type="checkbox" id="gem-rapid1" class="gem-checkbox w-4 h-4 rounded border-slate-700 text-amber-500 bg-slate-950 focus:ring-amber-500/25 cursor-pointer">
+                  </div>
+                  <div class="flex-1">
+                    <span class="font-bold text-emerald-400">Rapid Attacks I (Whirling Slash)</span>
+                    <ul class="list-disc list-inside text-slate-400 mt-1 space-y-0.5 pl-1">
+                      <li><strong class="text-slate-300">Ogham Village, The Executioner</strong></li>
+                    </ul>
+                  </div>
+                </div>
 
-              <div class="bg-slate-900 p-2.5 rounded border border-slate-800 text-xs">                
-                <span class="font-bold text-red-400">Prolonged Duration I</span>
-                <ul class="list-disc list-inside text-slate-400 mt-1 space-y-0.5 pl-1">
-                  <li><strong class="text-slate-300">The Manor Ramparts, Gallows</strong></li>
-                </ul>              
-              </div>
+                <div id="card-gem-duration1" class="bg-slate-950/60 p-2.5 rounded border border-slate-800 text-xs flex items-start space-x-2.5 transition duration-150 cursor-pointer hover:border-slate-600 select-none">                
+                  <div class="flex items-center h-4 mt-0.5 shrink-0">
+                    <input type="checkbox" id="gem-duration1" class="gem-checkbox w-4 h-4 rounded border-slate-700 text-amber-500 bg-slate-950 focus:ring-amber-500/25 cursor-pointer">
+                  </div>
+                  <div class="flex-1">
+                    <span class="font-bold text-red-400">Prolonged Duration I (War Banner)</span>
+                    <ul class="list-disc list-inside text-slate-400 mt-1 space-y-0.5 pl-1">
+                      <li><strong class="text-slate-300">The Manor Ramparts, Gallows</strong></li>
+                    </ul>              
+                  </div>
+                </div>
 
-              <div class="bg-slate-900 p-2.5 rounded border border-slate-800 text-xs">                
-                <span class="font-bold text-blue-400">Rapid Casting I (Barrage)</span>                             
-              </div>
-
-              <div class="bg-slate-900 p-2.5 rounded border border-slate-800 text-xs">                
-                <span class="font-bold text-blue-400">T2: Frost Nexus (Twisters)</span>                             
-              </div>
-
-              <div class="bg-slate-900 p-2.5 rounded border border-slate-800 text-xs">                
-                <span class="font-bold text-red-400">T2: Elemental Arma II (Twisters)</span> 
-                <ul class="list-disc list-inside text-slate-400 mt-1 space-y-0.5 pl-1">
-                  <li><strong class="text-slate-300">Mastodon Badlands Completion</strong></li>
-                </ul>                            
-              </div>
-
-              <div class="bg-slate-900 p-2.5 rounded border border-slate-800 text-xs">                
-                <span class="font-bold text-red-400">T2: Elemental Arma II (Herald of Ice)</span> 
-                <ul class="list-disc list-inside text-slate-400 mt-1 space-y-0.5 pl-1">
-                  <li><strong class="text-slate-300">The Buried Shrines Completion</strong></li>
-                </ul>                            
-              </div>
-
-              <div class="bg-slate-900 p-2.5 rounded border border-slate-800 text-xs">                
-                <span class="font-bold text-emerald-400">T3: Retreat II (Twisters)</span> 
-                <ul class="list-disc list-inside text-slate-400 mt-1 space-y-0.5 pl-1">
-                  <li><strong class="text-slate-300">Sandswept Marsh, League Mechanic</strong></li>
-                </ul>                            
-              </div>
-
-              <div class="bg-slate-900 p-2.5 rounded border border-slate-800 text-xs">                
-                <span class="font-bold text-blue-400">T3: Elemental Focus (Ice-Tipped Arrows)</span> 
-                <ul class="list-disc list-inside text-slate-400 mt-1 space-y-0.5 pl-1">
-                  <li><strong class="text-slate-300">Venom Crypts, Rare Sarcophagus</strong></li>
-                </ul>                            
-              </div>
-
-              <div class="bg-slate-900 p-2.5 rounded border border-slate-800 text-xs">                
-                <span class="font-bold text-emerald-400">T4: Rapid Attacks II (Whirling Slash)</span> 
-                <ul class="list-disc list-inside text-slate-400 mt-1 space-y-0.5 pl-1">
-                  <li><strong class="text-slate-300">Isle of Kin, The Beast Pen</strong></li>
-                </ul>                            
-              </div>
-
-              <div class="bg-slate-900 p-2.5 rounded border border-slate-800 text-xs">                
-                <span class="font-bold text-red-400">T4: Rage II (Whirling Slash)</span>                                           
-              </div>
-
-              <div class="bg-slate-900 p-2.5 rounded border border-slate-800 text-xs">                
-                <span class="font-bold text-blue-400">T4: Cooldown Recovery II (Ice-Tipped Arrows)</span> 
-                                          
-              </div>
-
-              <div class="bg-slate-900 p-2.5 rounded border border-slate-800 text-xs">                
-                <span class="font-bold text-emerald-400">T5: Charged Mark (Freezing Mark)</span>                                      
-              </div>
-
-              <div class="bg-slate-900 p-2.5 rounded border border-slate-800 text-xs">                
-                <span class="font-bold text-emerald-400">T5: Projectile Acceleration III (Twister)</span>                                      
-              </div>
-
-              <div class="bg-slate-900 p-2.5 rounded border border-slate-800 text-xs">                
-                <span class="font-bold text-red-400">T5: Rage III (Whirling Slash)</span>                                      
-              </div>
-
-              <div class="bg-slate-900 p-2.5 rounded border border-slate-800 text-xs">                
-                <span class="font-bold text-emerald-400">T5: Rapid Attacks III (Whirling Slash)</span>                                      
+                <div id="card-gem-casting1" class="bg-slate-950/60 p-2.5 rounded border border-slate-800 text-xs flex items-start space-x-2.5 transition duration-150 cursor-pointer hover:border-slate-600 select-none">                
+                  <div class="flex items-center h-4 mt-0.5 shrink-0">
+                    <input type="checkbox" id="gem-casting1" class="gem-checkbox w-4 h-4 rounded border-slate-700 text-amber-500 bg-slate-950 focus:ring-amber-500/25 cursor-pointer">
+                  </div>
+                  <div class="flex-1">
+                    <span class="font-bold text-blue-400">Rapid Casting I (Barrage)</span>                             
+                  </div>
+                </div>
               </div>
             </div>
+
+            <!-- Tier 2 Supports -->
+            <div class="bg-slate-900/40 border border-slate-800 rounded-lg p-3 space-y-2">
+              <div class="flex items-center justify-between border-b border-slate-800 pb-1.5">
+                <span class="text-xs font-bold text-amber-500 uppercase tracking-wider flex items-center gap-1.5">
+                  
+                  Tier 2
+                </span>
+              </div>
+              <div class="space-y-2">
+                <div id="card-gem-nexus2" class="bg-slate-950/60 p-2.5 rounded border border-slate-800 text-xs flex items-start space-x-2.5 transition duration-150 cursor-pointer hover:border-slate-600 select-none">                
+                  <div class="flex items-center h-4 mt-0.5 shrink-0">
+                    <input type="checkbox" id="gem-nexus2" class="gem-checkbox w-4 h-4 rounded border-slate-700 text-amber-500 bg-slate-950 focus:ring-amber-500/25 cursor-pointer">
+                  </div>
+                  <div class="flex-1">
+                    <span class="font-bold text-blue-400">Frost Nexus (Twisters)</span>                             
+                  </div>
+                </div>
+
+                <div id="card-gem-arma2-twister" class="bg-slate-950/60 p-2.5 rounded border border-slate-800 text-xs flex items-start space-x-2.5 transition duration-150 cursor-pointer hover:border-slate-600 select-none">                
+                  <div class="flex items-center h-4 mt-0.5 shrink-0">
+                    <input type="checkbox" id="gem-arma2-twister" class="gem-checkbox w-4 h-4 rounded border-slate-700 text-amber-500 bg-slate-950 focus:ring-amber-500/25 cursor-pointer">
+                  </div>
+                  <div class="flex-1">
+                    <span class="font-bold text-red-400">Elemental Arma II (Twisters)</span> 
+                    <ul class="list-disc list-inside text-slate-400 mt-1 space-y-0.5 pl-1">
+                      <li><strong class="text-slate-300">Mastodon Badlands Completion</strong></li>
+                    </ul>                            
+                  </div>
+                </div>
+
+                <div id="card-gem-arma2-hoi" class="bg-slate-950/60 p-2.5 rounded border border-slate-800 text-xs flex items-start space-x-2.5 transition duration-150 cursor-pointer hover:border-slate-600 select-none">                
+                  <div class="flex items-center h-4 mt-0.5 shrink-0">
+                    <input type="checkbox" id="gem-arma2-hoi" class="gem-checkbox w-4 h-4 rounded border-slate-700 text-amber-500 bg-slate-950 focus:ring-amber-500/25 cursor-pointer">
+                  </div>
+                  <div class="flex-1">
+                    <span class="font-bold text-red-400">Elemental Arma II (Herald of Ice)</span> 
+                    <ul class="list-disc list-inside text-slate-400 mt-1 space-y-0.5 pl-1">
+                      <li><strong class="text-slate-300">The Buried Shrines Completion</strong></li>
+                    </ul>                            
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Tier 3 Supports -->
+            <div class="bg-slate-900/40 border border-slate-800 rounded-lg p-3 space-y-2">
+              <div class="flex items-center justify-between border-b border-slate-800 pb-1.5">
+                <span class="text-xs font-bold text-amber-500 uppercase tracking-wider flex items-center gap-1.5">
+                  
+                  Tier 3 
+                </span>
+              </div>
+              <div class="space-y-2">
+                <div id="card-gem-retreat2" class="bg-slate-950/60 p-2.5 rounded border border-slate-800 text-xs flex items-start space-x-2.5 transition duration-150 cursor-pointer hover:border-slate-600 select-none">                
+                  <div class="flex items-center h-4 mt-0.5 shrink-0">
+                    <input type="checkbox" id="gem-retreat2" class="gem-checkbox w-4 h-4 rounded border-slate-700 text-amber-500 bg-slate-950 focus:ring-amber-500/25 cursor-pointer">
+                  </div>
+                  <div class="flex-1">
+                    <span class="font-bold text-emerald-400">Retreat II (Twisters)</span> 
+                    <ul class="list-disc list-inside text-slate-400 mt-1 space-y-0.5 pl-1">
+                      <li><strong class="text-slate-300">Sandswept Marsh, League Mechanic</strong></li>
+                    </ul>                            
+                  </div>
+                </div>
+
+                <div id="card-gem-focus3" class="bg-slate-950/60 p-2.5 rounded border border-slate-800 text-xs flex items-start space-x-2.5 transition duration-150 cursor-pointer hover:border-slate-600 select-none">                
+                  <div class="flex items-center h-4 mt-0.5 shrink-0">
+                    <input type="checkbox" id="gem-focus3" class="gem-checkbox w-4 h-4 rounded border-slate-700 text-amber-500 bg-slate-950 focus:ring-amber-500/25 cursor-pointer">
+                  </div>
+                  <div class="flex-1">
+                    <span class="font-bold text-blue-400">T3: Elemental Focus (Ice-Tipped Arrows)</span> 
+                    <ul class="list-disc list-inside text-slate-400 mt-1 space-y-0.5 pl-1">
+                      <li><strong class="text-slate-300">Venom Crypts, Rare Sarcophagus</strong></li>
+                    </ul>                            
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Tier 4 Supports -->
+            <div class="bg-slate-900/40 border border-slate-800 rounded-lg p-3 space-y-2">
+              <div class="flex items-center justify-between border-b border-slate-800 pb-1.5">
+                <span class="text-xs font-bold text-amber-500 uppercase tracking-wider flex items-center gap-1.5">
+                  
+                  Tier 4
+                </span>
+              </div>
+              <div class="space-y-2">
+                <div id="card-gem-rapid2" class="bg-slate-950/60 p-2.5 rounded border border-slate-800 text-xs flex items-start space-x-2.5 transition duration-150 cursor-pointer hover:border-slate-600 select-none">                
+                  <div class="flex items-center h-4 mt-0.5 shrink-0">
+                    <input type="checkbox" id="gem-rapid2" class="gem-checkbox w-4 h-4 rounded border-slate-700 text-amber-500 bg-slate-950 focus:ring-amber-500/25 cursor-pointer">
+                  </div>
+                  <div class="flex-1">
+                    <span class="font-bold text-emerald-400">Rapid Attacks II (Whirling Slash)</span> 
+                    <ul class="list-disc list-inside text-slate-400 mt-1 space-y-0.5 pl-1">
+                      <li><strong class="text-slate-300">Isle of Kin, The Beast Pen</strong></li>
+                    </ul>                            
+                  </div>
+                </div>
+
+                <div id="card-gem-rage2" class="bg-slate-950/60 p-2.5 rounded border border-slate-800 text-xs flex items-start space-x-2.5 transition duration-150 cursor-pointer hover:border-slate-600 select-none">                
+                  <div class="flex items-center h-4 mt-0.5 shrink-0">
+                    <input type="checkbox" id="gem-rage2" class="gem-checkbox w-4 h-4 rounded border-slate-700 text-amber-500 bg-slate-950 focus:ring-amber-500/25 cursor-pointer">
+                  </div>
+                  <div class="flex-1">
+                    <span class="font-bold text-red-400">Rage II (Whirling Slash)</span>                                           
+                  </div>
+                </div>
+
+                <div id="card-gem-cooldown2" class="bg-slate-950/60 p-2.5 rounded border border-slate-800 text-xs flex items-start space-x-2.5 transition duration-150 cursor-pointer hover:border-slate-600 select-none">                
+                  <div class="flex items-center h-4 mt-0.5 shrink-0">
+                    <input type="checkbox" id="gem-cooldown2" class="gem-checkbox w-4 h-4 rounded border-slate-700 text-amber-500 bg-slate-950 focus:ring-amber-500/25 cursor-pointer">
+                  </div>
+                  <div class="flex-1">
+                    <span class="font-bold text-blue-400">Cooldown Recovery II (Ice-Tipped Arrows)</span> 
+                  </div>
+                </div>
+
+                <div id="card-gem-icebite2" class="bg-slate-950/60 p-2.5 rounded border border-slate-800 text-xs flex items-start space-x-2.5 transition duration-150 cursor-pointer hover:border-slate-600 select-none">                
+                  <div class="flex items-center h-4 mt-0.5 shrink-0">
+                    <input type="checkbox" id="gem-icebite2" class="gem-checkbox w-4 h-4 rounded border-slate-700 text-amber-500 bg-slate-950 focus:ring-amber-500/25 cursor-pointer">
+                  </div>
+                  <div class="flex-1">
+                    <span class="font-bold text-emerald-400">Ice Bite II (Twister)</span> 
+                    <ul class="list-disc list-inside text-slate-400 mt-1 space-y-0.5 pl-1">
+                      <li><strong class="text-slate-300">Temporary, until T5 support</strong></li>
+                    </ul>                            
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Tier 5 Supports -->
+            <div class="bg-slate-900/40 border border-slate-800 rounded-lg p-3 space-y-2">
+              <div class="flex items-center justify-between border-b border-slate-800 pb-1.5">
+                <span class="text-xs font-bold text-amber-500 uppercase tracking-wider flex items-center gap-1.5">
+                  
+                  Tier 5
+                </span>
+              </div>
+              <div class="space-y-2">
+                <div id="card-gem-mark5" class="bg-slate-950/60 p-2.5 rounded border border-slate-800 text-xs flex items-start space-x-2.5 transition duration-150 cursor-pointer hover:border-slate-600 select-none">                
+                  <div class="flex items-center h-4 mt-0.5 shrink-0">
+                    <input type="checkbox" id="gem-mark5" class="gem-checkbox w-4 h-4 rounded border-slate-700 text-amber-500 bg-slate-950 focus:ring-amber-500/25 cursor-pointer">
+                  </div>
+                  <div class="flex-1">
+                    <span class="font-bold text-emerald-400">Charged Mark (Freezing Mark)</span>                                      
+                  </div>
+                </div>
+
+                <div id="card-gem-proj5" class="bg-slate-950/60 p-2.5 rounded border border-slate-800 text-xs flex items-start space-x-2.5 transition duration-150 cursor-pointer hover:border-slate-600 select-none">                
+                  <div class="flex items-center h-4 mt-0.5 shrink-0">
+                    <input type="checkbox" id="gem-proj5" class="gem-checkbox w-4 h-4 rounded border-slate-700 text-amber-500 bg-slate-950 focus:ring-amber-500/25 cursor-pointer">
+                  </div>
+                  <div class="flex-1">
+                    <span class="font-bold text-emerald-400">Projectile Acceleration III (Twister)</span>                                      
+                  </div>
+                </div>
+
+                <div id="card-gem-rage5" class="bg-slate-950/60 p-2.5 rounded border border-slate-800 text-xs flex items-start space-x-2.5 transition duration-150 cursor-pointer hover:border-slate-600 select-none">                
+                  <div class="flex items-center h-4 mt-0.5 shrink-0">
+                    <input type="checkbox" id="gem-rage5" class="gem-checkbox w-4 h-4 rounded border-slate-700 text-amber-500 bg-slate-950 focus:ring-amber-500/25 cursor-pointer">
+                  </div>
+                  <div class="flex-1">
+                    <span class="font-bold text-red-400">Rage III (Whirling Slash)</span>                                      
+                  </div>
+                </div>
+
+                <div id="card-gem-rapid5" class="bg-slate-950/60 p-2.5 rounded border border-slate-800 text-xs flex items-start space-x-2.5 transition duration-150 cursor-pointer hover:border-slate-600 select-none">                
+                  <div class="flex items-center h-4 mt-0.5 shrink-0">
+                    <input type="checkbox" id="gem-rapid5" class="gem-checkbox w-4 h-4 rounded border-slate-700 text-amber-500 bg-slate-950 focus:ring-amber-500/25 cursor-pointer">
+                  </div>
+                  <div class="flex-1">
+                    <span class="font-bold text-emerald-400">Rapid Attacks III (Whirling Slash)</span>                                      
+                  </div>
+                </div>
+              </div>
+            </div>
+
           </div>       
 
       </div>
@@ -395,7 +545,7 @@
       { id: 7, act: "Act 1", title: "Vendor > Spikes", desc: "Check for upgrades, place spikes > Grim Tangle." },
       { id: 8, act: "Act 1", title: "Grim Tangle", desc: "Druid boss for <b>Rage I on Whirling Slash</b>." },
       { id: 9, act: "Act 1", title: "Cemetery", desc: "League mechanic (Regal orb, for lvl 16 wep), Ring quest." },
-      { id: 10, act: "Act 1", title: "Tomb of Consort", desc: "Haunted Treasure for support gem. <b>Rapid Attacks on Whirling Slash</b>" },
+      { id: 10, act: "Act 1", title: "Tomb of Consort", desc: "Haunted Treasure for support gem. <b>Rapid Attacks I on Whirling Slash</b>" },
       { id: 11, act: "Act 1", title: "Mausoleum", desc: "From 1 corner to opposite corner (unless different in new league)." },
       { id: 12, act: "Act 1", title: "Lachlann", desc: "Open door, respawn at checkpoint, touch wp for flask refill, DONT pickup quest ring." },
       { id: 13, act: "Act 1", title: "Hunting Grounds", desc: "Crowbell boss (+2 Skills), Freythorn First." },
@@ -479,6 +629,7 @@
 
     let isCompact = false;
     let checkedItems = JSON.parse(localStorage.getItem('poe2_checked_steps')) || [];
+    let checkedGems = JSON.parse(localStorage.getItem('poe2_checked_gems')) || [];
     
     // Set all Acts to collapsed (true) initially on very first load if no local preference is saved
     let collapsedActs = JSON.parse(localStorage.getItem('poe2_collapsed_acts')) || {
@@ -507,6 +658,64 @@
       localStorage.setItem('poe2_checked_steps', JSON.stringify(checkedItems));
       renderChecklist();
     };
+
+    // Initialize Skill Gem Checkboxes with storage persistence and full-container-click support
+    function initGemCheckboxes() {
+      const checkboxes = document.querySelectorAll('.gem-checkbox');
+      checkboxes.forEach(cb => {
+        const gemId = cb.id;
+        const parentCard = document.getElementById('card-' + gemId);
+        
+        // Load initial state
+        if (checkedGems.includes(gemId)) {
+          cb.checked = true;
+          if (parentCard) parentCard.classList.add('opacity-40');
+        } else {
+          cb.checked = false;
+          if (parentCard) parentCard.classList.remove('opacity-40');
+        }
+
+        // Handle full card toggle actions
+        const toggleGemState = () => {
+          cb.checked = !cb.checked;
+          if (cb.checked) {
+            if (!checkedGems.includes(gemId)) {
+              checkedGems.push(gemId);
+            }
+            if (parentCard) parentCard.classList.add('opacity-40');
+          } else {
+            checkedGems = checkedGems.filter(id => id !== gemId);
+            if (parentCard) parentCard.classList.remove('opacity-40');
+          }
+          localStorage.setItem('poe2_checked_gems', JSON.stringify(checkedGems));
+        };
+
+        // Click handler on parent card container
+        if (parentCard) {
+          parentCard.addEventListener('click', (e) => {
+            // Guard to make sure if the user clicks the checkbox itself, we don't double-trigger
+            if (e.target !== cb) {
+              e.preventDefault();
+              toggleGemState();
+            }
+          });
+        }
+
+        // Direct change listener on checkbox in case clicked directly
+        cb.addEventListener('change', () => {
+          if (cb.checked) {
+            if (!checkedGems.includes(gemId)) {
+              checkedGems.push(gemId);
+            }
+            if (parentCard) parentCard.classList.add('opacity-40');
+          } else {
+            checkedGems = checkedGems.filter(id => id !== gemId);
+            if (parentCard) parentCard.classList.remove('opacity-40');
+          }
+          localStorage.setItem('poe2_checked_gems', JSON.stringify(checkedGems));
+        });
+      });
+    }
 
     // Render Checklist (With Acts Collapsible Structure)
     function renderChecklist() {
@@ -656,6 +865,7 @@
       if (resetApp.dataset.confirming === "true") {
         // Second click: Perform actual reset
         checkedItems = [];
+        checkedGems = [];
         
         // Re-apply default collapsed state after a complete progress reset
         collapsedActs = {
@@ -668,7 +878,15 @@
         };
         
         localStorage.removeItem('poe2_checked_steps');
+        localStorage.removeItem('poe2_checked_gems');
         localStorage.setItem('poe2_collapsed_acts', JSON.stringify(collapsedActs));
+
+        // Reset visual state of all gem checkboxes
+        document.querySelectorAll('.gem-checkbox').forEach(cb => {
+          cb.checked = false;
+          const parentCard = document.getElementById('card-' + cb.id);
+          if (parentCard) parentCard.classList.remove('opacity-40');
+        });
         
         // Reset button state
         resetApp.textContent = 'Progress Reset!';
@@ -733,8 +951,9 @@
       });
     }
 
-    // Initial Render
+    // Initial Render and setup
     renderChecklist();
+    initGemCheckboxes();
     }); // end DOMContentLoaded
   </script>
 </body>
