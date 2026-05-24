@@ -332,10 +332,10 @@
     const SKILL_COLOR = '#1ba29b';
     const LOOT_COLOR = '#ffff77';
 
-    const BOSSES = ['Kabala','Big Monkey','Blackjaw','Doryiani','Beast Boss','Miller','Beira','Crowbell','Candlemass'];
-    const QUEST_ITEMS = ["ascendancy token","Haunted Treasure","Una's Lute","Blacksmith tools","Quest letter"];
+    const BOSSES = ['Kabala','Big Monkey','Blackjaw','Doryiani','Beast Boss','Miller','Beira','Crowbell','Candlemass', 'boss', 'golems', 'Hooded One'];
+    const QUEST_ITEMS = ["ascendancy token","Haunted Treasure","Una's Lute","Blacksmith tools","Quest letter", "Chapel key"];
     const SKILLS = ['Spear Stab','Whirling Slash','Frost Bomb','Twister','Ice Tipped Arrows','Ice-Tipped Arrows','Barrage'];
-    const LOOT_ITEMS = ['winged spear','Ironhead Spear','omen scepter','resist ring','Regal orb'];
+    const LOOT_ITEMS = ['winged spear','Ironhead Spear','omen scepter','resist ring','Regal orb', 'Jewelers', 'amulet', 'ring', 'pearl', 'Exalts', 'Regals'];
 
     const SUPPORT_COLORS = {
       'Retreat': '#34d399',
@@ -395,7 +395,7 @@
       { id: 7, act: "Act 1", title: "Vendor > Spikes", desc: "Check for upgrades, place spikes > Grim Tangle." },
       { id: 8, act: "Act 1", title: "Grim Tangle", desc: "Druid boss for <b>Rage I on Whirling Slash</b>." },
       { id: 9, act: "Act 1", title: "Cemetery", desc: "League mechanic (Regal orb, for lvl 16 wep), Ring quest." },
-      { id: 10, act: "Act 1", title: "Tomb of Consort", desc: "Haunted Treasure for support gem. <b>Rapid attacks on Whirling</b>" },
+      { id: 10, act: "Act 1", title: "Tomb of Consort", desc: "Haunted Treasure for support gem. <b>Rapid Attacks on Whirling Slash</b>" },
       { id: 11, act: "Act 1", title: "Mausoleum", desc: "From 1 corner to opposite corner (unless different in new league)." },
       { id: 12, act: "Act 1", title: "Lachlann", desc: "Open door, respawn at checkpoint, touch wp for flask refill, DONT pickup quest ring." },
       { id: 13, act: "Act 1", title: "Hunting Grounds", desc: "Crowbell boss (+2 Skills), Freythorn First." },
@@ -419,7 +419,7 @@
       { id: 31, act: "Act 2", title: "Spires of Deshar", desc: "Going north, then down side (Look for Lit res quest). Mechanic (GCP)" },
       { id: 32, act: "Act 2", title: "Dreadnought", desc: "Reset at checkpoint if not 28 by boss." },
       { id: 33, act: "Act 2", title: "Town Hooded One", desc: "After 3 dialogue logout/in to skip to town faster." },
-      { id: 34, act: "Act 3", title: "Sandswept Marsh", desc: "Boss on sand area (Skill gem), Basket guarded by rares on grass area (Jewelers)" },
+      { id: 34, act: "Act 3", title: "Sandswept Marsh", desc: "Boss on sand area (Skill gem), League Mechanic (T3 Support), Basket guarded by rares on grass area (Jewelers)" },
       { id: 35, act: "Act 3", title: "Town", desc: "Logout/In after quest dialogue." },
       { id: 36, act: "Act 3", title: "Jungle Ruins", desc: "Big Monkey (+2 skills), NPC camp chest has rare gloves/belt." },
       { id: 37, act: "Act 3", title: "Venom Crypts", desc: "***In 0.5 Follow trail of snakes to end***. Rare Sarcophogus gives T2 Supp. Stun Threshold for reward." },
@@ -444,7 +444,7 @@
       { id: 56, act: "Act 4", title: "Shrike Island", desc: "Hop cliffs with leap" },
       { id: 57, act: "Act 4", title: "Eye of Hinekora -> Halls of Dead", desc: "In Halls, for tattoos go Straight north > Straight Right > South. Take resist rewards." },
       { id: 58, act: "Act 4", title: "Kedge Bay", desc: "Skip 2nd zone until JUST before maps. (WP to town at 2nd zone WP)" },
-      { id: 59, act: "Act 4", title: "Arastus", desc: "Lvl 46. Hop walls in city / cliffs. Click outside bell for exalts. Regals are opposite side in city." },
+      { id: 59, act: "Act 4", title: "Arastus", desc: "Lvl 46. Hop walls in city / cliffs. Click outside bell for Exalts. Regals are opposite side in city." },
       { id: 60, act: "Act 4", title: "Excavation", desc: "Amulet from mechanic. Reset checkpoint to skip boss dialogue." },
       { id: 61, act: "Act 4", title: "After Boss", desc: "Speak To Hooded One > Log out/Log In > Portal to Town > Vendor and clean inventory" },
       { id: 62, act: "Act 4", title: "Ngakanu", desc: "Do mechanic (Greater Jewelers on twister). Checkpoint means deadend, go other way." },
@@ -479,7 +479,16 @@
 
     let isCompact = false;
     let checkedItems = JSON.parse(localStorage.getItem('poe2_checked_steps')) || [];
-    let collapsedActs = JSON.parse(localStorage.getItem('poe2_collapsed_acts')) || {};
+    
+    // Set all Acts to collapsed (true) initially on very first load if no local preference is saved
+    let collapsedActs = JSON.parse(localStorage.getItem('poe2_collapsed_acts')) || {
+      "Act 1": true,
+      "Act 2": true,
+      "Act 3": true,
+      "Act 4": true,
+      "Interlude": true,
+      "Endgame": true
+    };
 
     
     window.toggleAct = function(act) {
@@ -647,9 +656,19 @@
       if (resetApp.dataset.confirming === "true") {
         // Second click: Perform actual reset
         checkedItems = [];
-        collapsedActs = {};
+        
+        // Re-apply default collapsed state after a complete progress reset
+        collapsedActs = {
+          "Act 1": true,
+          "Act 2": true,
+          "Act 3": true,
+          "Act 4": true,
+          "Interlude": true,
+          "Endgame": true
+        };
+        
         localStorage.removeItem('poe2_checked_steps');
-        localStorage.removeItem('poe2_collapsed_acts');
+        localStorage.setItem('poe2_collapsed_acts', JSON.stringify(collapsedActs));
         
         // Reset button state
         resetApp.textContent = 'Progress Reset!';
