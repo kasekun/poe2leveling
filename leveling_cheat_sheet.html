@@ -155,12 +155,17 @@
           <div class="space-y-2">
             <h4 class="text-xs font-bold text-slate-300 uppercase tracking-wider border-b border-slate-800 pb-1">Useful Links</h4>
             <div class="grid grid-cols-1 gap-2">
-              <div class="bg-slate-900 p-2.5 rounded border border-slate-800 flex items-start space-x-2.5">
-                <span class="text-xs font-mono font-bold bg-amber-500/20 text-amber-400 px-1.5 py-0.5 rounded">Vendor Regex</span>
-                <div class="text-xs">
-                  <span class="font-semibold block text-slate-200"><code>"!(uiv)" "spear|mov|[egdl] da.* to a"</code></span>
-                  <span class="text-slate-400 block mt-0.5">Copy / Paste into vendor search</span>
+              <div class="bg-slate-900 p-2.5 rounded border border-slate-800 flex items-center justify-between space-x-2.5">
+                <div class="flex items-start space-x-2.5">
+                  <span class="text-xs font-mono font-bold bg-amber-500/20 text-amber-400 px-1.5 py-0.5 rounded shrink-0">Vendor Regex</span>
+                  <div class="text-xs">
+                    <span id="regexString" class="font-bold block text-slate-200 font-mono tracking-tight select-all">"!(uiv)" "spear|mov|[egdl] da.* to a"</span>
+                    <span class="text-slate-400 block mt-0.5">Click the copy button on the right</span>
+                  </div>
                 </div>
+                <button id="copyRegexBtn" class="bg-slate-800 hover:bg-slate-700 text-slate-300 p-1.5 rounded border border-slate-700 transition flex items-center justify-center shrink-0" title="Copy Regex">
+                  <i data-lucide="copy" class="w-4 h-4 text-amber-500"></i>
+                </button>
               </div>
 
               <div class="bg-slate-900 p-2.5 rounded border border-slate-800 flex items-start space-x-2.5">
@@ -328,40 +333,40 @@
       { id: 2, act: "Act 1", title: "Early Gear Trade", desc: "Sell beach gear. Paste Regex and search vendor for flat damage weapon." },
       { id: 3, act: "Act 1", title: "Skills Acquired", desc: "Obtain <b>Twister</b> & <b>Frost Bomb</b>. Loop: Whirling Slash x3 -> Frost Bomb -> Twister." },
       { id: 4, act: "Act 1", title: "Clearfell", desc: "Skip Mud burrow, kill Beira, find chest by checkpoint for skill gem. Socket Frost Bomb" },
-      { id: 5, act: "Act 1", title: "The Grelwood / Areagne Kill", desc: "Bring inside hut to shotgun, Link <b>Rage I support to Whirling Slash</b>." },
+      { id: 5, act: "Act 1", title: "The Grelwood / Areagne Kill", desc: "Bring inside hut to shotgun, Link <b>Retreat I on Twister</b>." },
       { id: 6, act: "Act 1", title: "Red Veil", desc: "Open Refined arms for wep upgrade, Find Ironhead spear. Hit level 5 before town for Vendors. Life Flask upgrade." },
       { id: 7, act: "Act 1", title: "Vendor > Spikes", desc: "Check for upgrades, place spikes > Grim Tangle." },
-      { id: 8, act: "Act 1", title: "Grim Tangle", desc: "Druid boss for <b>retreat support on twister</b>." },
+      { id: 8, act: "Act 1", title: "Grim Tangle", desc: "Druid boss for <b>Rage I on Whirling Slash</b>." },
       { id: 9, act: "Act 1", title: "Cemetery", desc: "League mechanic (Regal orb, for lvl 16 wep), Ring quest." },
       { id: 10, act: "Act 1", title: "Tomb of Consort", desc: "Haunted Treasure for support gem. <b>Rapid attacks on Whirling</b>" },
       { id: 11, act: "Act 1", title: "Mausoleum", desc: "From 1 corner to opposite corner (unless different in new league)." },
       { id: 12, act: "Act 1", title: "Lachlann", desc: "Open door, respawn at checkpoint, touch wp for flask refill, DONT pickup quest ring." },
-      { id: 13, act: "Act 1", title: "Hunting Grounds", desc: "Crowbell boss, Freythorn." },
+      { id: 13, act: "Act 1", title: "Hunting Grounds", desc: "Crowbell boss (+2 Skills), Freythorn First." },
       { id: 14, act: "Act 1", title: "Freythorn", desc: "Reset at checkpoint before 2nd/3rd ritual for less mob spawns." },
       { id: 15, act: "Act 1", title: "Farmlands", desc: "Una's lute, Mechanic for lvl 4 gem." },
       { id: 16, act: "Act 1", title: "Ogham Village", desc: "Blacksmith tools, Mechanic (Articifer Orb)." },
       { id: 17, act: "Act 1", title: "Town", desc: "Flask, Socket <b>Barrage</b> at 14." },
       { id: 18, act: "Act 1", title: "Manor Ramparts / Manor", desc: "Candlemass, 14 before boss (for barrage), skip boss loot." },
       { id: 19, act: "Act 2", title: "Outskirts > Town", desc: "Halani Gates > TP out. Check for winged spear (atk speed preference for wep set 2)." },
-      { id: 20, act: "Act 2", title: "Quarry", desc: "<b>Ice Tipped arrows</b>, toss out parry/fang." },
+      { id: 20, act: "Act 2", title: "Quarry", desc: "<b>Ice Tipped arrows</b>, toss out parry/fang. Hit 16 here before mine." },
       { id: 21, act: "Act 2", title: "Traitor's Passage", desc: "Balbala for ascendancy token." },
       { id: 22, act: "Act 2", title: "Halani Gates", desc: "Reset at checkpoint to get NPC to come to you." },
       { id: 23, act: "Act 2", title: "Town", desc: "Omen scepter for wep set 1. Drop Frost Bomb at level 20 (stops working)." },
       { id: 24, act: "Act 2", title: "Trial Room Prio", desc: "Ritual > Escape > Chalice > Hourglass > Escape." },
       { id: 25, act: "Act 2", title: "Trial Boss", desc: "Ascend > relog to char screen > tp town." },
       { id: 26, act: "Act 2", title: "Mastadon Badlands / Bone Pits", desc: "Relic drops from Hyenas. League mechanic drops exalt. Stand on caster to kill bosses faster." },
-      { id: 27, act: "Act 2", title: "Keth / Lost City", desc: "Mechanic (GCP), Kabala, Snakes drop relic." },
-      { id: 28, act: "Act 2", title: "Buried Shrines", desc: "League mechanic (Jewelers on Twister)." },
+      { id: 27, act: "Act 2", title: "Keth / Lost City", desc: "Mechanic (GCP), Kabala Boss (+2 skill point), Snakes drop clan relic." },
+      { id: 28, act: "Act 2", title: "Buried Shrines", desc: "League mechanic (Jewelers on Twister). Resist ring near last checkpoint (Offering room)" },
       { id: 29, act: "Act 2", title: "Valley of Titans / Grotto", desc: "Choose Charm Charge gain from quest turnin." },
       { id: 30, act: "Act 2", title: "Deshar", desc: "Quest Letter (south side of buildings)." },
       { id: 31, act: "Act 2", title: "Spires of Deshar", desc: "Going north, then down side (Look for Lit res quest)." },
       { id: 32, act: "Act 2", title: "Dreadnought", desc: "Reset at checkpoint if not 28 by boss." },
       { id: 33, act: "Act 2", title: "Town Hooded One", desc: "After 3 dialogue logout/in to skip to town faster." },
-      { id: 34, act: "Act 3", title: "Sandswept Marsh", desc: "Boss, Jewelers, League mechanic." },
+      { id: 34, act: "Act 3", title: "Sandswept Marsh", desc: "Boss on sand area (Skill gem), Basket guarded by rares on grass area (Jewelers)" },
       { id: 35, act: "Act 3", title: "Town", desc: "Logout/In after quest dialogue." },
-      { id: 36, act: "Act 3", title: "Jungle Ruins", desc: "Big Monkey > Crypts." },
-      { id: 37, act: "Act 3", title: "Venom Crypts", desc: "Follow trail of snakes to end. Rare Sarcophogus gives T2 Supp. Stun Threshold for reward." },
-      { id: 38, act: "Act 3", title: "Azak Bog", desc: "Top right of zone (generally)." },
+      { id: 36, act: "Act 3", title: "Jungle Ruins", desc: "Big Monkey (+2 skills), NPC camp chest has rare gloves/belt." },
+      { id: 37, act: "Act 3", title: "Venom Crypts", desc: "***In 0.5 Follow trail of snakes to end***. Rare Sarcophogus gives T2 Supp. Stun Threshold for reward." },
+      { id: 38, act: "Act 3", title: "Azak Bog", desc: "***In 0.5 This area is in Waterways*** -- Boss is top right of zone (generally)." },
       { id: 39, act: "Act 3", title: "Chimeral Wetlands", desc: "Skip chaos trial, don't pickup quest item from chimera." },
       { id: 40, act: "Act 3", title: "Machinarium", desc: "Blackjaw > Use thunder leap on wep set 2 to bypass blockages." },
       { id: 41, act: "Act 3", title: "Jiquani's Sanctum", desc: "Run to one side checkpoint, tp to start and go opposite way. Respawn at checkpoint after placing cores." },
@@ -374,14 +379,14 @@
       { id: 48, act: "Act 3", title: "Black Chambers", desc: "TP out after boss skip loot" },
       { id: 49, act: "Act 4", title: "Town", desc: "Click Doryiani, dodge away. Spam dialogue on Alva for quest item, Head to boat" },
       { id: 50, act: "Act 4", title: "Island Completion Order", desc: "Isle of Kin > Whakapanu > Abandoned Prison > Shrike Island > Eye of Hinekora > Kedge Bay > Ngakanu" },
-      { id: 51, act: "Act 4", title: "Isle of Kin", desc: "Mechanic (GCP), Beast Boss for Skills, Beast in cage for support (Rapid attacks 2 on whirling)" },
+      { id: 51, act: "Act 4", title: "Isle of Kin -> Warrens", desc: "Mechanic (GCP), Beast Boss for Skills, Beast in cage for support (Rapid attacks 2 on whirling)" },
       { id: 52, act: "Act 4", title: "Volcanic Warrens", desc: "Golems drop good ring" },
-      { id: 53, act: "Act 4", title: "Whakapana Island / Caverns", desc: "Caverns are a circle, boss towards center. Get max rage and full spins to one shot boss and skip phase." },
-      { id: 54, act: "Act 4", title: "Abandoned Prison", desc: "Chapel key from necromancers > Take inc life reward" },
+      { id: 53, act: "Act 4", title: "Whakapana Island -> Caverns", desc: "Caverns are a circle, boss towards center. Get pearl for turnin if you need amulet. Get max rage and full spins to one shot boss and skip phase." },
+      { id: 54, act: "Act 4", title: "Abandoned Prison -> Solitary Confinement", desc: "Chapel key from necromancers > Take inc life reward" },
       { id: 55, act: "Act 4", title: "Solitary Confinement", desc: "Mobs get DR from waves here, just hop over mobs and skip to end ASAP" },
       { id: 56, act: "Act 4", title: "Shrike Island", desc: "Hop cliffs with leap" },
-      { id: 57, act: "Act 4", title: "Eye of Hinekora / Halls of Dead", desc: "In Halls, go Straight north > Straight Right > South. Take resist rewards." },
-      { id: 58, act: "Act 4", title: "Kedge Bay", desc: "Skip 2nd zone (WP to town at 2nd zone WP)" },
+      { id: 57, act: "Act 4", title: "Eye of Hinekora -> Halls of Dead", desc: "In Halls, for tattoos go Straight north > Straight Right > South. Take resist rewards." },
+      { id: 58, act: "Act 4", title: "Kedge Bay", desc: "Skip 2nd zone until JUST before maps. (WP to town at 2nd zone WP)" },
       { id: 59, act: "Act 4", title: "Arastus", desc: "Lvl 46. Hop walls in city / cliffs. Click outside bell for exalts. Regals are opposite side in city." },
       { id: 60, act: "Act 4", title: "Excavation", desc: "Amulet from mechanic. Reset checkpoint to skip boss dialogue." },
       { id: 61, act: "Act 4", title: "After Boss", desc: "Speak To Hooded One > Log out/Log In > Portal to Town > Vendor and clean inventory" },
@@ -483,24 +488,32 @@
 
         steps.forEach(step => {
           const isChecked = checkedItems.includes(step.id);
+          
+          // SIGNIFICANTLY ENHANCED CONTRAST AND BOLDNESS FOR HIGH READABILITY
           const cardClass = isChecked 
-            ? "bg-slate-900/30 border-slate-900/60 opacity-60"
-            : "bg-slate-900/80 border-slate-800 hover:border-slate-700";
-          const titleClass = isChecked ? "line-through text-slate-500 font-semibold" : "font-bold text-slate-200";
-          const textClass = isChecked ? "text-slate-600 line-through" : "text-slate-400";
+            ? "bg-slate-950/40 border-slate-900/40 opacity-50"
+            : "bg-slate-900 border-slate-700 hover:border-slate-500 hover:shadow-lg transition duration-150";
+          
+          const titleClass = isChecked 
+            ? "line-through text-slate-600 font-medium text-xs uppercase tracking-wide" 
+            : "font-black text-amber-400 text-xs sm:text-sm uppercase tracking-wider";
+          
+          const textClass = isChecked 
+            ? "text-slate-600 line-through text-xs font-normal" 
+            : "text-slate-50 font-bold text-xs sm:text-[13px] leading-relaxed mt-1";
 
           actHtml += `
-            <div class="p-2.5 rounded border ${cardClass} flex items-start space-x-2.5 transition select-none">
-              <div class="flex items-center h-5 mt-0.5">
+            <div class="p-3 rounded-lg border ${cardClass} flex items-start space-x-3 transition select-none">
+              <div class="flex items-center h-5 mt-0.5 shrink-0">
                 <input type="checkbox" id="step-${step.id}" ${isChecked ? 'checked' : ''} 
-                  class="w-4 h-4 rounded border-slate-700 text-amber-500 bg-slate-950 focus:ring-amber-500/25 focus:ring-offset-slate-950 cursor-pointer"
+                  class="w-4.5 h-4.5 rounded border-slate-600 text-amber-500 bg-slate-950 focus:ring-amber-500/25 focus:ring-offset-slate-950 cursor-pointer"
                   onchange="event.stopPropagation(); toggleStep(${step.id})">
               </div>
               <div class="flex-1 cursor-pointer" onclick="toggleStep(${step.id})">
                 <div class="flex items-center justify-between mb-0.5">
-                  <span class="${titleClass} text-xs">${step.title}</span>
+                  <span class="${titleClass}">${step.title}</span>
                 </div>
-                <p class="${textClass} text-[11px] leading-relaxed mt-0.5">${step.desc}</p>
+                <p class="${textClass}">${step.desc}</p>
               </div>
             </div>
           `;
@@ -610,6 +623,38 @@
         }, 3000);
       }
     });
+
+    // Copy to Clipboard logic for Vendor Regex box
+    const copyBtn = document.getElementById('copyRegexBtn');
+    if (copyBtn) {
+      copyBtn.addEventListener('click', () => {
+        const regexStr = '"!(uiv)" "spear|mov|[egdl] da.* to a"';
+        const el = document.createElement('textarea');
+        el.value = regexStr;
+        el.setAttribute('readonly', '');
+        el.style.position = 'absolute';
+        el.style.left = '-9999px';
+        document.body.appendChild(el);
+        el.select();
+        
+        let success = false;
+        try {
+          success = document.execCommand('copy');
+        } catch (err) {
+          console.error('Copy failed', err);
+        }
+        document.body.removeChild(el);
+
+        if (success) {
+          copyBtn.innerHTML = '<i data-lucide="check" class="w-4 h-4 text-emerald-400"></i>';
+          lucide.createIcons();
+          setTimeout(() => {
+            copyBtn.innerHTML = '<i data-lucide="copy" class="w-4 h-4 text-amber-500"></i>';
+            lucide.createIcons();
+          }, 2000);
+        }
+      });
+    }
 
     // Initial Render
     renderChecklist();
