@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full bg-slate-950 text-slate-100">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PoE 2 Huntress Spear Leveling Guide & Tracker</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest" defer></script>
+  <style>
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: #090d16; }
+    ::-webkit-scrollbar-thumb { background: #334155; border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: #eab308; }
+    .glow-gold { box-shadow: 0 0 12px rgba(234, 179, 8, 0.15); }
+
+    /* Smooth tier collapse */
+    .tier-content {
+      overflow: hidden;
+      transition: max-height 220ms cubic-bezier(0.4, 0, 0.2, 1),
+                  opacity 160ms ease-out,
+                  margin-top 220ms cubic-bezier(0.4, 0, 0.2, 1);
+      max-height: 900px;
+      margin-top: 0.5rem;
+    }
+    .tier-content.is-collapsed {
+      max-height: 0;
+      opacity: 0;
+      margin-top: 0;
+    }
+
+    /* Focus rings for tier toggle buttons (keyboard nav) */
+    [id^="tier-"] > button:focus-visible,
+    [id^="stier-"] > button:focus-visible {
+      outline: 2px solid oklch(0.75 0.12 80 / 0.45);
+      outline-offset: -2px;
+      border-radius: 4px;
+    }
+
+    /* Respect reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+<body class="h-full font-sans antialiased overflow-hidden flex flex-col">
+
+  <!-- HEADER -->
+  <header class="bg-slate-900 border-b border-slate-800 px-4 py-2 flex items-center justify-between shrink-0">
+    <div class="flex items-center space-x-3">
+      <div class="bg-amber-500 text-slate-950 p-1.5 rounded-lg flex items-center justify-center">
+        <i data-lucide="zap" class="w-5 h-5 fill-current"></i>
+      </div>
+      <div>
+        <h1 class="text-sm font-bold tracking-wider text-amber-500 uppercase">Huntress Spear-Twister</h1>
+        <p class="text-xs text-slate-400">Campaign WR Speedrun Strategy Cheat Sheet</p>
+      </div>
+    </div>
+    <button id="resetApp" class="bg-red-950/40 text-red-400 hover:bg-red-900/40 text-xs px-3 py-1.5 rounded border border-red-900/50 transition duration-200" title="Reset all checkboxes">
+      Reset Progress
+    </button>
+  </header>
+
+  <!-- MAIN 3-COLUMN LAYOUT -->
+  <main class="flex-1 flex overflow-hidden">
+
+    <!-- COLUMN 1: SUPPORT GEM PRIORITY -->
+    <section class="flex-1 flex flex-col border-r border-slate-800 bg-slate-950 overflow-hidden min-w-[280px]">
+      <div class="p-3 bg-slate-900/50 border-b border-slate-800 shrink-0">
+        <span class="text-xs font-semibold text-slate-400 tracking-wider uppercase flex items-center gap-1.5">
+          <i data-lucide="gem" class="w-4 h-4 text-amber-500"></i> Support Gem Priority
+        </span>
+      </div>
+      <div class="flex-1 overflow-y-auto p-3 space-y-3">
+
+        <!-- Tier 1 -->
+        <div class="bg-slate-900/40 border border-slate-800 rounded-lg p-3" id="tier-1">
+          <button onclick="toggleTier('tier-1')" class="w-full flex items-center justify-between pb-1.5 border-b border-slate-800 select-none focus:outline-none">
+            <span class="text-xs font-bold text-amber-500 uppercase tracking-wider">Tier 1</span>
+            <i data-lucide="chevron-down" class="w-3.5 h-3.5 text-slate-500 transition-transform duration-200" id="chevron-tier-1"></i>
+          </button>
+          <div class="space-y-2 mt-2" id="tier-1-content">
+            <div id="card-gem-retreat1" class="bg-slate-950/60 p-2.5 rounded border border-slate-800 text-xs flex items-start space-x-2.5 transition duration-150 cursor-pointer hover:border-slate-600 select-none">
+              <div class="flex items-center h-4 mt-0.5 shrink-0"><input type="checkbox" id="gem-retreat1" class="gem-checkbox w-4 h-4 rounded border-slate-700 text-amber-500 bg-slate-950 focus:ring-amber-500/25 cursor-pointer"></div>
+              <div class="flex-1"><span class="font-bold text-emerald-400">Retreat I (Twisters)</span><ul class="list-disc list-inside text-slate-400 mt-1 space-y-0.5 pl-1"><li><strong class="text-slate-300">The Grelwood, Areagne</strong></li></ul></div>
+            </div>
+            <div id="card-gem-rage1" class="bg-slate-950/60 p-2.5 rounded border border-slate-800 text-xs flex items-start space-x-2.5 transition duration-150 cursor-pointer hover:border-slate-600 select-none">
+              <div class="flex items-center h-4 mt-0.5 shrink-0"><input type="checkbox" id="gem-rage1" class="gem-checkbox w-4 h-4 rounded border-slate-700 text-amber-500 bg-slate-950 focus:ring-amber-500/25 cursor-pointer"></div>
+              <div class="flex-1"><span class="font-bold text-red-400">Rage I (Whirling Slash)</span><ul class="list-disc list-inside text-slate-400 mt-1 space-y-0.5 pl-1"><li><strong class="text-slate-300">Tomb of the Consort, Haunted Treasure</strong></li></ul></div>
+            </div>
+            <div id="card-gem-rapid1" class="bg-slate-950/60 p-2.5 rounded border border-slate-800 text-xs flex items-start space-x-2.5 transition duration-150 cursor-pointer hover:border-slate-600 select-none">
+              <div class="flex items-center h-4 mt-0.5 shrink-0"><input type="checkbox" id="gem-rapid1" class="gem-checkbox w-4 h-4 rounded border-slate-700 text-amber-500 bg-slate-950 focus:ring-amber-500/25 cursor-pointer"></div>
+              <div class="flex-1"><span class="font-bold text-emerald-400">Rapid Attacks I (Whirling Slash)</span><ul class="list-disc list-inside text-slate-400 mt-1 space-y-0.5 pl-1"><li><strong class="text-slate-300">Ogham Village, The Executioner</strong></li></ul></div>
+            </div>
+            <div id="card-gem-duration1" class="bg-slate-950/60 p-2.5 rounded border border-slate-800 text-xs flex items-start space-x-2.5 transition duration-150 cursor-pointer hover:border-slate-600 select-none">
+              <div class="flex items-center h-4 mt-0.5 shrink-0"><input type="checkbox" id="gem-duration1" class="gem-checkbox w-4 h-4 rounded border-slate-700 text-amber-500 bg-slate-950 focus:ring-amber-500/25 cursor-pointer"></div>
+              <div class="flex-1"><span class="font-bold text-red-400">Prolonged Duration I (War Banner)</span><ul class="list-disc list-inside text-slate-400 mt-1 space-y-0.5 pl-1"><li><strong class="text-slate-300">The Manor Ramparts, Gallows</strong></li></ul></div>
+            </div>
+            <div id="card-gem-casting1" class="bg-slate-950/60 p-2.5 rounded border border-slate-800 text-xs flex items-start space-x-2.5 transition duration-150 cursor-pointer hover:border-slate-600 select-none">
+              <div class="flex items-center h-4 mt-0.5 shrink-0"><input type="checkbox" id="gem-casting1" class="gem-checkbox w-4 h-4 rounded border-slate-700 text-amber-500 bg-slate-950 focus:ring-amber-500/25 cursor-pointer"></div>
+              <div class="flex-1"><span class="font-bold text-blue-400">Rapid Casting I (Barrage)</span></div>
+            </div>
+            <div id="card-gem-casting1ita" class="bg-slate-950/60 p-2.5 rounded border border-slate-800 text-xs flex items-start space-x-2.5 transition duration-150 cursor-pointer hover:border-slate-600 select-none">
+              <div class="flex items-center h-4 mt-0.5 shrink-0"><input type="checkbox" id="gem-casting1ita" class="gem-checkbox w-4 h-4 rounded border-slate-700 text-amber-500 bg-slate-950 focus:ring-amber-500/25 cursor-pointer"></div>
+              <div class="flex-1"><span class="font-bold text-blue-400">Magnified Area I (Ice-Tipped Arrows)</span></div>
+            </div>
+            <div id="card-gem-magarea1hoi" class="bg-slate-950/60 p-2.5 rounded border border-slate-800 text-xs flex items-start space-x-2.5 transition duration-150 cursor-pointer hover:border-slate-600 select-none">
+              <div class="flex items-center h-4 mt-0.5 shrink-0"><input type="checkbox" id="gem-magarea1hoi" class="gem-checkbox w-4 h-4 rounded border-slate-700 text-amber-500 bg-slate-950 focus:ring-amber-500/25 cursor-pointer"></div>
+              <div class="flex-1"><span class="font-bold text-blue-400">Magnified Area I (Herald of Ice)</span></div>
+            </div>
+            <div id="card-gem-coldattunehoi" class="bg-slate-950/60 p-2.5 rounded border border-slate-800 text-xs flex items-start space-x-2.5 transition duration-150 cursor-pointer hover:border-slate-600 select-none">
+              <div class="flex items-center h-4 mt-0.5 shrink-0"><input type="checkbox" id="gem-coldattunehoi" class="gem-checkbox w-4 h-4 rounded border-slate-700 text-amber-500 bg-slate-950 focus:ring-amber-500/25 cursor-pointer"></div>
+              <div class="flex-1"><span class="font-bold text-blue-400">Cold Attunement (Herald of Ice)</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tier 2 -->
+        <div class="bg-slate-900/40 border border-slate-800 rounded-lg p-3" id="tier-2">
+          <button onclick="toggleTier('tier-2')" class="w-full flex items-center justify-between pb-1.5 border-b border-slate-800 select-none focus:outline-none group">
+            <span class="text-xs font-bold text-amber-500 uppercase tracking-wider">Tier 2</span>
+            <i data-lucide="chevron-down" class="w-3.5 h-3.5 text-slate-500 transition-transform duration-200" id="chevron-tier-2"></i>
+          </button>
+          <div class="space-y-2 mt-2" id="tier-2-content">
+            <div id="card-gem-nexus2" class="bg-slate-950/60 p-2.5 rounded border border-slate-800 text-xs flex items-start space-x-2.5 transition duration-150 cursor-pointer hover:border-slate-600 select-none">
+              <div class="flex items-center h-4 mt-0.5 shrink-0"><input type="checkbox" id="gem-nexus2" class="gem-checkbox w-4 h-4 rounded border-slate-700 text-amber-500 bg-slate-950 focus:ring-amber-500/25 cursor-pointer"></div>
+              <div class="flex-1"><span class="font-bold text-blue-400">Frost Nexus (Twisters)</span></div>
+            </div>
+            <div id="card-gem-arma2-twister" class="bg-slate-950/60 p-2.5 rounded border border-slate-800 text-xs flex items-start space-x-2.5 transition duration-150 cursor-pointer hover:border-slate-600 select-none">
+              <div class="flex items-center h-4 mt-0.5 shrink-0"><input type="checkbox" id="gem-arma2-twister" class="gem-checkbox w-4 h-4 rounded border-slate-700 text-amber-500 bg-slate-950 focus:ring-amber-500/25 cursor-pointer"></div>
+              <div class="flex-1"><span class="font-bold text-red-400">Elemental Arma II (Twisters)</span><ul class="list-disc list-inside text-slate-400 mt-1 space-y-0.5 pl-1"><li><strong class="text-slate-300">Mastodon Badlands Completion</strong></li></ul></div>
+            </div>
+            <div id="card-gem-arma2-ita" class="bg-slate-950/60 p-2.5 rounded border border-slate-800 text-xs flex items-start space-x-2.5 transition duration-150 cursor-pointer hover:border-slate-600 select-none">
+              <div class="flex items-center h-4 mt-0.5 shrink-0"><input type="checkbox" id="gem-arma2-ita" class="gem-checkbox w-4 h-4 rounded border-slate-700 text-amber-500 bg-slate-950 focus:ring-amber-500/25 cursor-pointer"></div>
+              <div class="flex-1"><span class="font-bold text-red-400">Elemental Arma II (Ice-Tipped Arrows)</span></div>
+            </div>
+            <div id="card-gem-arma2-hoi" class="bg-slate-950/60 p-2.5 rounded border border-slate-800 text-xs flex items-start space-x-2.5 transition duration-150 cursor-pointer hover:border-slate-600 select-none">
+              <div class="flex items-center h-4 mt-0.5 shrink-0"><input type="checkbox" id="gem-arma2-hoi" class="gem-checkbox w-4 h-4 rounded border-slate-700 text-amber-500 bg-slate-950 focus:ring-amber-500/25 cursor-pointer"></div>
+              <div class="flex-1"><span class="font-bold text-red-400">Elemental Arma II (Herald of Ice)</span><ul class="list-disc list-inside text-slate-400 mt-1 space-y-0.5 pl-1"><li><strong class="text-slate-300">The Buried Shrines Completion</strong></li></ul></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tier 3 -->
+        <div class="bg-slate-900/40 border border-slate-800 rounded-lg p-3" id="tier-3">
+          <button onclick="toggleTier('tier-3')" class="w-full flex items-center justify-between pb-1.5 border-b border-slate-800 select-none focus:outline-none group">
+            <span class="text-xs font-bold text-amber-500 uppercase tracking-wider">Tier 3</span>
+            <i data-lucide="chevron-down" class="w-3.5 h-3.5 text-slate-500 transition-transform duration-200" id="chevron-tier-3"></i>
+          </button>
+          <div class="space-y-2 mt-2" id="tier-3-content">
+            <div id="card-gem-retreat2" class="bg-slate-950/60 p-2.5 rounded border border-slate-800 text-xs flex items-start space-x-2.5 transition duration-150 cursor-pointer hover:border-slate-600 select-none">
+              <div class="flex items-center h-4 mt-0.5 shrink-0"><input type="checkbox" id="gem-retreat2" class="gem-checkbox w-4 h-4 rounded border-slate-700 text-amber-500 bg-slate-950 focus:ring-amber-500/25 cursor-pointer"></div>
+              <div class="flex-1"><span class="font-bold text-emerald-400">Retreat II (Twisters)</span><ul class="list-disc list-inside text-slate-400 mt-1 space-y-0.5 pl-1"><li><strong class="text-slate-300">Sandswept Marsh, League Mechanic</strong></li></ul></div>
+            </div>
+            <div id="card-gem-focus3" class="bg-slate-950/60 p-2.5 rounded border border-slate-800 text-xs flex items-start space-x-2.5 transition duration-150 cursor-pointer hover:border-slate-600 select-none">
+              <div class="flex items-center h-4 mt-0.5 shrink-0"><input type="checkbox" id="gem-focus3" class="gem-checkbox w-4 h-4 rounded border-slate-700 text-amber-500 bg-slate-950 focus:ring-amber-500/25 cursor-pointer"></div>
+              <div class="flex-1"><span class="font-bold text-blue-400">Elemental Focus (Ice-Tipped Arrows)</span><ul class="list-disc list-inside text-slate-400 mt-1 space-y-0.5 pl-1"><li><strong class="text-slate-300">Venom Crypts, Rare Sarcophagus</strong></li></ul></div>
+            </div>
+            <div id="card-gem-knockback" class="bg-slate-950/60 p-2.5 rounded border border-slate-800 text-xs flex items-start space-x-2.5 transition duration-150 cursor-pointer hover:border-slate-600 select-none">
+              <div class="flex items-center h-4 mt-0.5 shrink-0"><input type="checkbox" id="gem-knockback" class="gem-checkbox w-4 h-4 rounded border-slate-700 text-amber-500 bg-slate-950 focus:ring-amber-500/25 cursor-pointer"></div>
+              <div class="flex-1"><span class="font-bold text-red-400">Knockback (Whirling Slash)</span></div>
+            </div>
+            <div id="card-gem-cooldownbarrage" class="bg-slate-950/60 p-2.5 rounded border border-slate-800 text-xs flex items-start space-x-2.5 transition duration-150 cursor-pointer hover:border-slate-600 select-none">
+              <div class="flex items-center h-4 mt-0.5 shrink-0"><input type="checkbox" id="gem-cooldownbarrage" class="gem-checkbox w-4 h-4 rounded border-slate-700 text-amber-500 bg-slate-950 focus:ring-amber-500/25 cursor-pointer"></div>
+              <div class="flex-1"><span class="font-bold text-emerald-400">Cooldown Recovery I (Barrage)</span></div>
+            </div>
+            <div id="card-gem-duration2banner" class="bg-slate-950/60 p-2.5 rounded border border-slate-800 text-xs flex items-start space-x-2.5 transition duration-150 cursor-pointer hover:border-slate-600 select-none">
+              <div class="flex items-center h-4 mt-0.5 shrink-0"><input type="checkbox" id="gem-duration2banner" class="gem-checkbox w-4 h-4 rounded border-slate-700 text-amber-500 bg-slate-950 focus:ring-amber-500/25 cursor-pointer"></div>
+              <div class="flex-1"><span class="font-bold text-blue-400">Prolonged Duration II (War Banner)</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tier 4 -->
+        <div class="bg-slate-900/40 border border-slate-800 rounded-lg p-3" id="tier-4">
+          <button onclick="toggleTier('tier-4')" class="w-full flex items-center justify-between pb-1.5 border-b border-slate-800 select-none focus:outline-none group">
+            <span class="text-xs font-bold text-amber-500 uppercase tracking-wider">Tier 4</span>
+            <i data-lucide="chevron-down" class="w-3.5 h-3.5 text-slate-500 transition-transform duration-200" id="chevron-tier-4"></i>
+          </button>
+          <div class="space-y-2 mt-2" id="tier-4-content">
+            <div id="card-gem-rapid2" class="bg-slate-950/60 p-2.5 rounded border border-slate-800 text-xs flex items-start space-x-2.5 transition duration-150 cursor-pointer hover:border-slate-600 select-none">
+              <div class="flex items-center h-4 mt-0.5 shrink-0"><input type="checkbox" id="gem-rapid2" class="gem-checkbox w-4 h-4 rounded border-slate-700 text-amber-500 bg-slate-950 focus:ring-amber-500/25 cursor-pointer"></div>
+              <div class="flex-1"><span class="font-bold text-emerald-400">Rapid Attacks II (Whirling Slash)</span><ul class="list-disc list-inside text-slate-400 mt-1 space-y-0.5 pl-1"><li><strong class="text-slate-300">Isle of Kin, The Beast Pen</strong></li></ul></div>
+            </div>
+            <div id="card-gem-rage2" class="bg-slate-950/60 p-2.5 rounded border border-slate-800 text-xs flex items-start space-x-2.5 transition duration-150 cursor-pointer hover:border-slate-600 select-none">
+              <div class="flex items-center h-4 mt-0.5 shrink-0"><input type="checkbox" id="gem-rage2" class="gem-checkbox w-4 h-4 rounded border-slate-700 text-amber-500 bg-slate-950 focus:ring-amber-500/25 cursor-pointer"></div>
+              <div class="flex-1"><span class="font-bold text-red-400">Rage II (Whirling Slash)</span></div>
+            </div>
+            <div id="card-gem-cooldown2" class="bg-slate-950/60 p-2.5 rounded border border-slate-800 text-xs flex items-start space-x-2.5 transition duration-150 cursor-pointer hover:border-slate-600 select-none">
+              <div class="flex items-center h-4 mt-0.5 shrink-0"><input type="checkbox" id="gem-cooldown2" class="gem-checkbox w-4 h-4 rounded border-slate-700 text-amber-500 bg-slate-950 focus:ring-amber-500/25 cursor-pointer"></div>
+              <div class="flex-1"><span class="font-bold text-blue-400">Cooldown Recovery II (Ice-Tipped Arrows)</span></div>
+            </div>
+            <div id="card-gem-icebite2" class="bg-slate-950/60 p-2.5 rounded border border-slate-800 text-xs flex items-start space-x-2.5 transition duration-150 cursor-pointer hover:border-slate-600 select-none">
+              <div class="flex items-center h-4 mt-0.5 shrink-0"><input type="checkbox" id="gem-icebite2" class="gem-checkbox w-4 h-4 rounded border-slate-700 text-amber-500 bg-slate-950 focus:ring-amber-500/25 cursor-pointer"></div>
+              <div class="flex-1"><span class="font-bold text-blue-400">Ice Bite II (Twister)</span><ul class="list-disc list-inside text-slate-400 mt-1 space-y-0.5 pl-1"><li><strong class="text-slate-300">Temporary, until T5 support</strong></li></ul></div>
+            </div>
+            <div id="card-gem-rapid2barrage" class="bg-slate-950/60 p-2.5 rounded border border-slate-800 text-xs flex items-start space-x-2.5 transition duration-150 cursor-pointer hover:border-slate-600 select-none">
+              <div class="flex items-center h-4 mt-0.5 shrink-0"><input type="checkbox" id="gem-rapid2barrage" class="gem-checkbox w-4 h-4 rounded border-slate-700 text-amber-500 bg-slate-950 focus:ring-amber-500/25 cursor-pointer"></div>
+              <div class="flex-1"><span class="font-bold text-blue-400">Rapid Casting II (Barrage)</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tier 5 -->
+        <div class="bg-slate-900/40 border border-slate-800 rounded-lg p-3" id="tier-5">
+          <button onclick="toggleTier('tier-5')" class="w-full flex items-center justify-between pb-1.5 border-b border-slate-800 select-none focus:outline-none group">
+            <span class="text-xs font-bold text-amber-500 uppercase tracking-wider">Tier 5</span>
+            <i data-lucide="chevron-down" class="w-3.5 h-3.5 text-slate-500 transition-transform duration-200" id="chevron-tier-5"></i>
+          </button>
+          <div class="space-y-2 mt-2" id="tier-5-content">
+            <div id="card-gem-mark5" class="bg-slate-950/60 p-2.5 rounded border border-slate-800 text-xs flex items-start space-x-2.5 transition duration-150 cursor-pointer hover:border-slate-600 select-none">
+              <div class="flex items-center h-4 mt-0.5 shrink-0"><input type="checkbox" id="gem-mark5" class="gem-checkbox w-4 h-4 rounded border-slate-700 text-amber-500 bg-slate-950 focus:ring-amber-500/25 cursor-pointer"></div>
+              <div class="flex-1"><span class="font-bold text-emerald-400">Charged Mark (Freezing Mark)</span></div>
+            </div>
+            <div id="card-gem-proj5" class="bg-slate-950/60 p-2.5 rounded border border-slate-800 text-xs flex items-start space-x-2.5 transition duration-150 cursor-pointer hover:border-slate-600 select-none">
+              <div class="flex items-center h-4 mt-0.5 shrink-0"><input type="checkbox" id="gem-proj5" class="gem-checkbox w-4 h-4 rounded border-slate-700 text-amber-500 bg-slate-950 focus:ring-amber-500/25 cursor-pointer"></div>
+              <div class="flex-1"><span class="font-bold text-emerald-400">Projectile Acceleration III (Twister)</span></div>
+            </div>
+            <div id="card-gem-rage5" class="bg-slate-950/60 p-2.5 rounded border border-slate-800 text-xs flex items-start space-x-2.5 transition duration-150 cursor-pointer hover:border-slate-600 select-none">
+              <div class="flex items-center h-4 mt-0.5 shrink-0"><input type="checkbox" id="gem-rage5" class="gem-checkbox w-4 h-4 rounded border-slate-700 text-amber-500 bg-slate-950 focus:ring-amber-500/25 cursor-pointer"></div>
+              <div class="flex-1"><span class="font-bold text-red-400">Rage III (Whirling Slash)</span></div>
+            </div>
+            <div id="card-gem-rapid5" class="bg-slate-950/60 p-2.5 rounded border border-slate-800 text-xs flex items-start space-x-2.5 transition duration-150 cursor-pointer hover:border-slate-600 select-none">
+              <div class="flex items-center h-4 mt-0.5 shrink-0"><input type="checkbox" id="gem-rapid5" class="gem-checkbox w-4 h-4 rounded border-slate-700 text-amber-500 bg-slate-950 focus:ring-amber-500/25 cursor-pointer"></div>
+              <div class="flex-1"><span class="font-bold text-emerald-400">Rapid Attacks III (Whirling Slash)</span></div>
+            </div>
+            <div id="card-gem-rapid3leap" class="bg-slate-950/60 p-2.5 rounded border border-slate-800 text-xs flex items-start space-x-2.5 transition duration-150 cursor-pointer hover:border-slate-600 select-none">
+              <div class="flex items-center h-4 mt-0.5 shrink-0"><input type="checkbox" id="gem-rapid3leap" class="gem-checkbox w-4 h-4 rounded border-slate-700 text-amber-500 bg-slate-950 focus:ring-amber-500/25 cursor-pointer"></div>
+              <div class="flex-1"><span class="font-bold text-emerald-400">Rapid Attacks III (Thunder Leap)</span></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- COLUMN 2: SKILL GEMS -->
+    <section class="flex-1 flex flex-col border-r border-slate-800 bg-slate-950 overflow-hidden min-w-[280px]">
+      <div class="p-3 bg-slate-900/50 border-b border-slate-800 shrink-0">
+        <span class="text-xs font-semibold text-slate-400 tracking-wider uppercase flex items-center gap-1.5">
+          <i data-lucide="layers" class="w-4 h-4 text-amber-500"></i> Skill Gems
+        </span>
+      </div>
+      <div class="flex-1 overflow-y-auto p-3 space-y-3">
+
+        <!-- Tier 1 -->
+        <div class="bg-slate-900/40 border border-slate-800 rounded-lg p-3" id="stier-1">
+          <button onclick="toggleSkillTier('stier-1')" class="w-full flex items-center justify-between pb-1.5 border-b border-slate-800 select-none focus:outline-none">
+            <span class="text-xs font-bold text-amber-500 uppercase tracking-wider">Tier 1</span>
+            <i data-lucide="chevron-down" class="w-3.5 h-3.5 text-slate-500 transition-transform duration-200" id="chevron-stier-1"></i>
+          </button>
+          <div class="space-y-2 mt-2" id="stier-1-content">
+            <div id="card-sgem-twister" class="bg-slate-950/60 p-2.5 rounded border border-slate-800 text-xs flex items-start space-x-2.5 transition duration-150 cursor-pointer hover:border-slate-600 select-none">
+              <div class="flex items-center h-4 mt-0.5 shrink-0"><input type="checkbox" id="sgem-twister" class="gem-checkbox w-4 h-4 rounded border-slate-700 text-amber-500 bg-slate-950 focus:ring-amber-500/25 cursor-pointer"></div>
+              <div class="flex-1"><span class="font-bold text-teal-400">Twister</span></div>
+            </div>
+            <div id="card-sgem-whirling" class="bg-slate-950/60 p-2.5 rounded border border-slate-800 text-xs flex items-start space-x-2.5 transition duration-150 cursor-pointer hover:border-slate-600 select-none">
+              <div class="flex items-center h-4 mt-0.5 shrink-0"><input type="checkbox" id="sgem-whirling" class="gem-checkbox w-4 h-4 rounded border-slate-700 text-amber-500 bg-slate-950 focus:ring-amber-500/25 cursor-pointer"></div>
+              <div class="flex-1"><span class="font-bold text-teal-400">Whirling Slash</span></div>
+            </div>
+            <div id="card-sgem-frostbomb" class="bg-slate-950/60 p-2.5 rounded border border-slate-800 text-xs flex items-start space-x-2.5 transition duration-150 cursor-pointer hover:border-slate-600 select-none">
+              <div class="flex items-center h-4 mt-0.5 shrink-0"><input type="checkbox" id="sgem-frostbomb" class="gem-checkbox w-4 h-4 rounded border-slate-700 text-amber-500 bg-slate-950 focus:ring-amber-500/25 cursor-pointer"></div>
+              <div class="flex-1"><span class="font-bold text-teal-400">Frost Bomb</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tier 2 -->
+        <div class="bg-slate-900/40 border border-slate-800 rounded-lg p-3" id="stier-2">
+          <button onclick="toggleSkillTier('stier-2')" class="w-full flex items-center justify-between pb-1.5 border-b border-slate-800 select-none focus:outline-none">
+            <span class="text-xs font-bold text-amber-500 uppercase tracking-wider">Tier 2</span>
+            <i data-lucide="chevron-down" class="w-3.5 h-3.5 text-slate-500 transition-transform duration-200" id="chevron-stier-2"></i>
+          </button>
+          <div class="space-y-2 mt-2" id="stier-2-content">
+            <div id="card-sgem-upg-t2" class="bg-slate-950/40 p-2.5 rounded border border-slate-800/60 text-xs flex items-start space-x-2.5 transition duration-150 cursor-pointer hover:border-slate-600 select-none">
+              <div class="flex items-center h-4 mt-0.5 shrink-0"><input type="checkbox" id="sgem-upg-t2" class="gem-checkbox w-4 h-4 rounded border-slate-700 text-amber-500 bg-slate-950 focus:ring-amber-500/25 cursor-pointer"></div>
+              <div class="flex-1"><span class="font-bold text-slate-400">Upgrade gems</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tier 3 -->
+        <div class="bg-slate-900/40 border border-slate-800 rounded-lg p-3" id="stier-3">
+          <button onclick="toggleSkillTier('stier-3')" class="w-full flex items-center justify-between pb-1.5 border-b border-slate-800 select-none focus:outline-none">
+            <span class="text-xs font-bold text-amber-500 uppercase tracking-wider">Tier 3</span>
+            <i data-lucide="chevron-down" class="w-3.5 h-3.5 text-slate-500 transition-transform duration-200" id="chevron-stier-3"></i>
+          </button>
+          <div class="space-y-2 mt-2" id="stier-3-content">
+            <div id="card-sgem-fangsfrost" class="bg-slate-950/60 p-2.5 rounded border border-slate-800 text-xs flex items-start space-x-2.5 transition duration-150 cursor-pointer hover:border-slate-600 select-none">
+              <div class="flex items-center h-4 mt-0.5 shrink-0"><input type="checkbox" id="sgem-fangsfrost" class="gem-checkbox w-4 h-4 rounded border-slate-700 text-amber-500 bg-slate-950 focus:ring-amber-500/25 cursor-pointer"></div>
+              <div class="flex-1"><span class="font-bold text-teal-400">Fangs of Frost</span></div>
+            </div>
+            <div id="card-sgem-upg-t3" class="bg-slate-950/40 p-2.5 rounded border border-slate-800/60 text-xs flex items-start space-x-2.5 transition duration-150 cursor-pointer hover:border-slate-600 select-none">
+              <div class="flex items-center h-4 mt-0.5 shrink-0"><input type="checkbox" id="sgem-upg-t3" class="gem-checkbox w-4 h-4 rounded border-slate-700 text-amber-500 bg-slate-950 focus:ring-amber-500/25 cursor-pointer"></div>
+              <div class="flex-1"><span class="font-bold text-slate-400">Upgrade gems</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tier 4 -->
+        <div class="bg-slate-900/40 border border-slate-800 rounded-lg p-3" id="stier-4">
+          <button onclick="toggleSkillTier('stier-4')" class="w-full flex items-center justify-between pb-1.5 border-b border-slate-800 select-none focus:outline-none">
+            <span class="text-xs font-bold text-amber-500 uppercase tracking-wider">Tier 4</span>
+            <i data-lucide="chevron-down" class="w-3.5 h-3.5 text-slate-500 transition-transform duration-200" id="chevron-stier-4"></i>
+          </button>
+          <div class="space-y-2 mt-2" id="stier-4-content">
+            <div class="flex items-center gap-1.5 mb-0.5">
+              <span class="text-[9px] font-bold uppercase tracking-widest text-purple-400">Spirit</span>
+              <div class="flex-1 h-px bg-purple-500/20"></div>
+            </div>
+            <div id="card-sgem-warbanner" class="bg-purple-950/30 p-2.5 rounded border border-purple-900/40 text-xs flex items-start space-x-2.5 transition duration-150 cursor-pointer hover:border-purple-700/50 select-none">
+              <div class="flex items-center h-4 mt-0.5 shrink-0"><input type="checkbox" id="sgem-warbanner" class="gem-checkbox w-4 h-4 rounded border-slate-700 text-amber-500 bg-slate-950 focus:ring-amber-500/25 cursor-pointer"></div>
+              <div class="flex-1"><span class="font-bold text-purple-400">War Banner</span></div>
+            </div>
+            <div id="card-sgem-heraldice" class="bg-purple-950/30 p-2.5 rounded border border-purple-900/40 text-xs flex items-start space-x-2.5 transition duration-150 cursor-pointer hover:border-purple-700/50 select-none">
+              <div class="flex items-center h-4 mt-0.5 shrink-0"><input type="checkbox" id="sgem-heraldice" class="gem-checkbox w-4 h-4 rounded border-slate-700 text-amber-500 bg-slate-950 focus:ring-amber-500/25 cursor-pointer"></div>
+              <div class="flex-1"><span class="font-bold text-purple-400">Herald of Ice</span></div>
+            </div>
+            <div class="flex items-center gap-1.5 mt-1 mb-0.5">
+              <span class="text-[9px] font-bold uppercase tracking-widest text-teal-600">Skills</span>
+              <div class="flex-1 h-px bg-teal-500/15"></div>
+            </div>
+            <div id="card-sgem-upg-t4" class="bg-slate-950/40 p-2.5 rounded border border-slate-800/60 text-xs flex items-start space-x-2.5 transition duration-150 cursor-pointer hover:border-slate-600 select-none">
+              <div class="flex items-center h-4 mt-0.5 shrink-0"><input type="checkbox" id="sgem-upg-t4" class="gem-checkbox w-4 h-4 rounded border-slate-700 text-amber-500 bg-slate-950 focus:ring-amber-500/25 cursor-pointer"></div>
+              <div class="flex-1"><span class="font-bold text-slate-400">Upgrade gems</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tier 5 -->
+        <div class="bg-slate-900/40 border border-slate-800 rounded-lg p-3" id="stier-5">
+          <button onclick="toggleSkillTier('stier-5')" class="w-full flex items-center justify-between pb-1.5 border-b border-slate-800 select-none focus:outline-none">
+            <span class="text-xs font-bold text-amber-500 uppercase tracking-wider">Tier 5</span>
+            <i data-lucide="chevron-down" class="w-3.5 h-3.5 text-slate-500 transition-transform duration-200" id="chevron-stier-5"></i>
+          </button>
+          <div class="space-y-2 mt-2" id="stier-5-content">
+            <div id="card-sgem-barrage" class="bg-slate-950/60 p-2.5 rounded border border-slate-800 text-xs flex items-start space-x-2.5 transition duration-150 cursor-pointer hover:border-slate-600 select-none">
+              <div class="flex items-center h-4 mt-0.5 shrink-0"><input type="checkbox" id="sgem-barrage" class="gem-checkbox w-4 h-4 rounded border-slate-700 text-amber-500 bg-slate-950 focus:ring-amber-500/25 cursor-pointer"></div>
+              <div class="flex-1"><span class="font-bold text-teal-400">Barrage</span></div>
+            </div>
+            <div id="card-sgem-ita" class="bg-slate-950/60 p-2.5 rounded border border-slate-800 text-xs flex items-start space-x-2.5 transition duration-150 cursor-pointer hover:border-slate-600 select-none">
+              <div class="flex items-center h-4 mt-0.5 shrink-0"><input type="checkbox" id="sgem-ita" class="gem-checkbox w-4 h-4 rounded border-slate-700 text-amber-500 bg-slate-950 focus:ring-amber-500/25 cursor-pointer"></div>
+              <div class="flex-1"><span class="font-bold text-teal-400">Ice-Tipped Arrows</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tier 6 -->
+        <div class="bg-slate-900/40 border border-slate-800 rounded-lg p-3" id="stier-6">
+          <button onclick="toggleSkillTier('stier-6')" class="w-full flex items-center justify-between pb-1.5 border-b border-slate-800 select-none focus:outline-none">
+            <span class="text-xs font-bold text-amber-500 uppercase tracking-wider">Tier 6</span>
+            <i data-lucide="chevron-down" class="w-3.5 h-3.5 text-slate-500 transition-transform duration-200" id="chevron-stier-6"></i>
+          </button>
+          <div class="space-y-2 mt-2" id="stier-6-content">
+            <div id="card-sgem-upg-t6" class="bg-slate-950/40 p-2.5 rounded border border-slate-800/60 text-xs flex items-start space-x-2.5 transition duration-150 cursor-pointer hover:border-slate-600 select-none">
+              <div class="flex items-center h-4 mt-0.5 shrink-0"><input type="checkbox" id="sgem-upg-t6" class="gem-checkbox w-4 h-4 rounded border-slate-700 text-amber-500 bg-slate-950 focus:ring-amber-500/25 cursor-pointer"></div>
+              <div class="flex-1"><span class="font-bold text-slate-400">Upgrade gems</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tier 7 -->
+        <div class="bg-slate-900/40 border border-slate-800 rounded-lg p-3" id="stier-7">
+          <button onclick="toggleSkillTier('stier-7')" class="w-full flex items-center justify-between pb-1.5 border-b border-slate-800 select-none focus:outline-none">
+            <span class="text-xs font-bold text-amber-500 uppercase tracking-wider">Tier 7</span>
+            <i data-lucide="chevron-down" class="w-3.5 h-3.5 text-slate-500 transition-transform duration-200" id="chevron-stier-7"></i>
+          </button>
+          <div class="space-y-2 mt-2" id="stier-7-content">
+            <div id="card-sgem-freezingmark" class="bg-slate-950/60 p-2.5 rounded border border-slate-800 text-xs flex items-start space-x-2.5 transition duration-150 cursor-pointer hover:border-slate-600 select-none">
+              <div class="flex items-center h-4 mt-0.5 shrink-0"><input type="checkbox" id="sgem-freezingmark" class="gem-checkbox w-4 h-4 rounded border-slate-700 text-amber-500 bg-slate-950 focus:ring-amber-500/25 cursor-pointer"></div>
+              <div class="flex-1"><span class="font-bold text-teal-400">Freezing Mark</span></div>
+            </div>
+            <div id="card-sgem-upg-t7" class="bg-slate-950/40 p-2.5 rounded border border-slate-800/60 text-xs flex items-start space-x-2.5 transition duration-150 cursor-pointer hover:border-slate-600 select-none">
+              <div class="flex items-center h-4 mt-0.5 shrink-0"><input type="checkbox" id="sgem-upg-t7" class="gem-checkbox w-4 h-4 rounded border-slate-700 text-amber-500 bg-slate-950 focus:ring-amber-500/25 cursor-pointer"></div>
+              <div class="flex-1"><span class="font-bold text-slate-400">Upgrade gems</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tier 8 -->
+        <div class="bg-slate-900/40 border border-slate-800 rounded-lg p-3" id="stier-8">
+          <button onclick="toggleSkillTier('stier-8')" class="w-full flex items-center justify-between pb-1.5 border-b border-slate-800 select-none focus:outline-none">
+            <span class="text-xs font-bold text-amber-500 uppercase tracking-wider">Tier 8</span>
+            <i data-lucide="chevron-down" class="w-3.5 h-3.5 text-slate-500 transition-transform duration-200" id="chevron-stier-8"></i>
+          </button>
+          <div class="space-y-2 mt-2" id="stier-8-content">
+            <div class="flex items-center gap-1.5 mb-0.5">
+              <span class="text-[9px] font-bold uppercase tracking-widest text-purple-400">Spirit</span>
+              <div class="flex-1 h-px bg-purple-500/20"></div>
+            </div>
+            <div id="card-sgem-combatfrenzy" class="bg-purple-950/30 p-2.5 rounded border border-purple-900/40 text-xs flex items-start space-x-2.5 transition duration-150 cursor-pointer hover:border-purple-700/50 select-none">
+              <div class="flex items-center h-4 mt-0.5 shrink-0"><input type="checkbox" id="sgem-combatfrenzy" class="gem-checkbox w-4 h-4 rounded border-slate-700 text-amber-500 bg-slate-950 focus:ring-amber-500/25 cursor-pointer"></div>
+              <div class="flex-1"><span class="font-bold text-purple-400">Combat Frenzy</span></div>
+            </div>
+            <div class="flex items-center gap-1.5 mt-1 mb-0.5">
+              <span class="text-[9px] font-bold uppercase tracking-widest text-teal-600">Skills</span>
+              <div class="flex-1 h-px bg-teal-500/15"></div>
+            </div>
+            <div id="card-sgem-upg-t8" class="bg-slate-950/40 p-2.5 rounded border border-slate-800/60 text-xs flex items-start space-x-2.5 transition duration-150 cursor-pointer hover:border-slate-600 select-none">
+              <div class="flex items-center h-4 mt-0.5 shrink-0"><input type="checkbox" id="sgem-upg-t8" class="gem-checkbox w-4 h-4 rounded border-slate-700 text-amber-500 bg-slate-950 focus:ring-amber-500/25 cursor-pointer"></div>
+              <div class="flex-1"><span class="font-bold text-slate-400">Upgrade gems</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tier 9 -->
+        <div class="bg-slate-900/40 border border-slate-800 rounded-lg p-3" id="stier-9">
+          <button onclick="toggleSkillTier('stier-9')" class="w-full flex items-center justify-between pb-1.5 border-b border-slate-800 select-none focus:outline-none">
+            <span class="text-xs font-bold text-amber-500 uppercase tracking-wider">Tier 9</span>
+            <i data-lucide="chevron-down" class="w-3.5 h-3.5 text-slate-500 transition-transform duration-200" id="chevron-stier-9"></i>
+          </button>
+          <div class="space-y-2 mt-2" id="stier-9-content">
+            <div id="card-sgem-thunderleap" class="bg-slate-950/60 p-2.5 rounded border border-slate-800 text-xs flex items-start space-x-2.5 transition duration-150 cursor-pointer hover:border-slate-600 select-none">
+              <div class="flex items-center h-4 mt-0.5 shrink-0"><input type="checkbox" id="sgem-thunderleap" class="gem-checkbox w-4 h-4 rounded border-slate-700 text-amber-500 bg-slate-950 focus:ring-amber-500/25 cursor-pointer"></div>
+              <div class="flex-1"><span class="font-bold text-teal-400">Thunderous Leap</span></div>
+            </div>
+            <div id="card-sgem-upg-t9" class="bg-slate-950/40 p-2.5 rounded border border-slate-800/60 text-xs flex items-start space-x-2.5 transition duration-150 cursor-pointer hover:border-slate-600 select-none">
+              <div class="flex items-center h-4 mt-0.5 shrink-0"><input type="checkbox" id="sgem-upg-t9" class="gem-checkbox w-4 h-4 rounded border-slate-700 text-amber-500 bg-slate-950 focus:ring-amber-500/25 cursor-pointer"></div>
+              <div class="flex-1"><span class="font-bold text-slate-400">Upgrade gems</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tier 10+ -->
+        <div class="bg-slate-900/40 border border-slate-800 rounded-lg p-3" id="stier-10">
+          <button onclick="toggleSkillTier('stier-10')" class="w-full flex items-center justify-between pb-1.5 border-b border-slate-800 select-none focus:outline-none">
+            <span class="text-xs font-bold text-amber-500 uppercase tracking-wider">Tier 10+</span>
+            <i data-lucide="chevron-down" class="w-3.5 h-3.5 text-slate-500 transition-transform duration-200" id="chevron-stier-10"></i>
+          </button>
+          <div class="space-y-2 mt-2" id="stier-10-content">
+            <div id="card-sgem-upg-t10" class="bg-slate-950/40 p-2.5 rounded border border-slate-800/60 text-xs flex items-start space-x-2.5 transition duration-150 cursor-pointer hover:border-slate-600 select-none">
+              <div class="flex items-center h-4 mt-0.5 shrink-0"><input type="checkbox" id="sgem-upg-t10" class="gem-checkbox w-4 h-4 rounded border-slate-700 text-amber-500 bg-slate-950 focus:ring-amber-500/25 cursor-pointer"></div>
+              <div class="flex-1"><span class="font-bold text-slate-400">Upgrade gems</span></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- COLUMN 3: REFERENCE -->
+    <section class="w-[360px] shrink-0 flex flex-col border-l border-slate-800 bg-slate-900/40 overflow-hidden">
+      <div class="p-3 bg-slate-900/50 border-b border-slate-800 shrink-0">
+        <span class="text-xs font-semibold text-slate-400 tracking-wider uppercase flex items-center gap-1.5">
+          <i data-lucide="book-open" class="w-4 h-4 text-amber-500"></i> Reference
+        </span>
+      </div>
+      <div class="flex-1 overflow-y-auto p-4 space-y-4">
+
+        <div class="bg-amber-500/10 border border-amber-500/20 p-3.5 rounded-lg space-y-1.5 glow-gold">
+          <h3 class="text-sm font-bold text-amber-400 flex items-center gap-1.5 uppercase">
+            <i data-lucide="sparkles" class="w-4 h-4"></i> XP Penalty Ranges
+          </h3>
+          <p class="text-xs text-slate-300 leading-relaxed">XP falls off if you are too far below a zone level.</p>
+          <ul class="text-xs text-slate-400 list-disc list-inside space-y-1 pl-1">
+            <li><strong>1-15: </strong> <strong class="text-emerald-400">3 levels under</strong>.</li>
+            <li><strong>16-32: </strong> <strong class="text-emerald-400">4 levels under</strong>.</li>
+            <li><strong>33-48: </strong> <strong class="text-emerald-400">5 levels under</strong>.</li>
+            <li><strong>49+: </strong> <strong class="text-emerald-400">6 levels under</strong>.</li>
+          </ul>
+        </div>
+
+        <div class="bg-amber-500/10 border border-amber-500/20 p-3.5 rounded-lg space-y-1.5 glow-gold">
+          <h3 class="text-sm font-bold text-amber-400 flex items-center gap-1.5 uppercase">
+            <i data-lucide="sparkles" class="w-4 h-4"></i> Weapon Damage Roll Reference
+          </h3>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            If the DMG roll is NOT within two tiers of your highest attainable, it's not worth crafting on. Hold alt to view item tiers.
+          </p>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            <strong>Recommended Spear bases to use currency on:</strong>
+          </p>
+          <ul class="text-xs text-slate-400 list-disc list-inside space-y-1 pl-1">
+            <li>Lvl 16 (Winged Spear, atk speed % for Whirling slash)</li>
+            <li>Lvl 21 (War Spear)</li>
+            <li>Lvl 45 (Crossblade Spear)</li>
+            <li>Lvl 65 (Helix Spear)</li>
+          </ul>
+          <div class="grid grid-cols-2 gap-3 pt-2">
+            <div>
+              <p class="text-[11px] font-bold text-slate-300 uppercase tracking-wide border-b border-amber-500/20 pb-1 mb-1.5">Flat Dmg Tiers</p>
+              <p class="text-[10px] text-slate-400 mb-1 leading-tight">iLvl required for Phys/Ele:</p>
+              <ul class="text-xs text-slate-400 list-disc list-inside space-y-1 pl-1 font-mono">
+                <li><strong>T10: </strong> <strong class="text-emerald-400">1</strong></li>
+                <li><strong>T9: </strong> <strong class="text-emerald-400">8</strong></li>
+                <li><strong>T8: </strong> <strong class="text-emerald-400">16</strong></li>
+                <li><strong>T7: </strong> <strong class="text-emerald-400">33</strong></li>
+                <li><strong>T6: </strong> <strong class="text-emerald-400">46</strong></li>
+                <li><strong>T5: </strong> <strong class="text-emerald-400">54</strong></li>
+                <li><strong>T4: </strong> <strong class="text-emerald-400">60</strong></li>
+                <li><strong>T3: </strong> <strong class="text-emerald-400">65</strong></li>
+              </ul>
+            </div>
+            <div>
+              <p class="text-[11px] font-bold text-slate-300 uppercase tracking-wide border-b border-amber-500/20 pb-1 mb-1.5">IPD Tiers</p>
+              <p class="text-[10px] text-slate-400 mb-1 leading-tight">iLvl required for Phys %:</p>
+              <ul class="text-xs text-slate-400 list-disc list-inside space-y-1 pl-1 font-mono">
+                <li><strong>T8: </strong> <strong class="text-emerald-400">1</strong></li>
+                <li><strong>T7: </strong> <strong class="text-emerald-400">8</strong></li>
+                <li><strong>T6: </strong> <strong class="text-emerald-400">16</strong></li>
+                <li><strong>T5: </strong> <strong class="text-emerald-400">33</strong></li>
+                <li><strong>T4: </strong> <strong class="text-emerald-400">46</strong></li>
+                <li><strong>T3: </strong> <strong class="text-emerald-400">60</strong></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="space-y-2">
+          <h4 class="text-xs font-bold text-slate-300 uppercase tracking-wider border-b border-slate-800 pb-1">Useful Links</h4>
+          <div class="grid grid-cols-1 gap-2">
+            <div class="bg-slate-900 p-2.5 rounded border border-slate-800 flex items-center justify-between space-x-2.5">
+              <div class="flex items-start space-x-2.5">
+                <span class="text-xs font-mono font-bold bg-amber-500/20 text-amber-400 px-1.5 py-0.5 rounded shrink-0">Vendor Regex</span>
+                <div class="text-xs">
+                  <span id="regexString" class="font-bold block text-slate-200 font-mono tracking-tight select-all">"!(uiv)" "spear|mov|[egdl] da.* to a"</span>
+                  <span class="text-slate-400 block mt-0.5">Click the copy button on the right</span>
+                </div>
+              </div>
+              <button id="copyRegexBtn" class="bg-slate-800 hover:bg-slate-700 text-slate-300 p-1.5 rounded border border-slate-700 transition flex items-center justify-center shrink-0" title="Copy Regex">
+                <i data-lucide="copy" class="w-4 h-4 text-amber-500"></i>
+              </button>
+            </div>
+            <div class="bg-slate-900 p-2.5 rounded border border-slate-800 flex items-start space-x-2.5">
+              <span class="text-xs font-mono font-bold bg-cyan-500/20 text-cyan-400 px-1.5 py-0.5 rounded shrink-0">Loot Filter</span>
+              <div class="text-xs">
+                <span class="font-semibold block text-slate-200"><a target="_blank" href="https://www.pathofexile.com/account/view-profile/GuyThatDies-7619/item-filters" class="hover:underline text-amber-400">GuyThatDies Leveling Filter</a></span>
+                <span class="text-slate-400 block mt-0.5">Usable for leveling. Change towards endgame.</span>
+              </div>
+            </div>
+            <div class="bg-slate-900 p-2.5 rounded border border-slate-800 flex items-start space-x-2.5">
+              <span class="text-xs font-mono font-bold bg-emerald-500/20 text-emerald-400 px-1.5 py-0.5 rounded shrink-0">Passive Tree</span>
+              <div class="text-xs">
+                <span class="font-semibold block text-slate-200"><a target="_blank" href="https://mobalytics.gg/poe-2/builds/twister-huntress-levelling#739a0a0f-6bd0-4807-8096-eee5ae1617ec-passive-tree-0" class="hover:underline text-emerald-400">GuyThatDies Passive Tree</a></span>
+                <span class="text-slate-400 block mt-0.5">Variations by act</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="space-y-2">
+          <h4 class="text-xs font-bold text-slate-300 uppercase tracking-wider border-b border-slate-800 pb-1">General Tips</h4>
+          <div class="bg-slate-900 p-3 rounded border border-slate-800 space-y-2 text-xs">
+            <ol class="list-decimal pl-4 text-slate-400 space-y-1">
+              <li>Hug zone walls to consistently find objectives and exits.</li>
+              <li>Keep Currency in dedicated locations on left. Place junk on right.</li>
+              <li>Buy plenty of wisdoms.</li>
+              <li>Throw out old / useless gems/currency.</li>
+              <li>If knocked down in sprint, log out to character screen to get up instantly.</li>
+              <li>Ctrl + left click on Hooded One to instant ID (also to move quest items).</li>
+            </ol>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-slate-900 border-t border-slate-800 px-4 py-1.5 flex justify-between items-center text-xs text-slate-400 shrink-0">
+    <div class="flex items-center space-x-2">
+      <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+      <span>Gem Tracker</span>
+    </div>
+    <div class="font-mono text-slate-500">Huntress Spear Build Tracker v1.4</div>
+  </footer>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      lucide.createIcons();
+
+      let checkedGems = JSON.parse(localStorage.getItem('poe2_checked_gems')) || [];
+
+      // Bootstrap all tier content divs with the animation class and strip the
+      // static mt-2 (CSS .tier-content handles the margin so it can animate).
+      document.querySelectorAll('[id$="-content"]').forEach(el => {
+        if (/^s?tier-/.test(el.id)) {
+          el.classList.add('tier-content');
+          el.classList.remove('mt-2');
+        }
+      });
+
+      // Generic collapse group — one function for both tier sets.
+      function makeTierGroup(storageKey, tierIds) {
+        let state = JSON.parse(localStorage.getItem(storageKey)) || {};
+
+        function apply(tierId) {
+          const content = document.getElementById(tierId + '-content');
+          const chevron = document.getElementById('chevron-' + tierId);
+          const btn = document.querySelector('#' + tierId + ' > button');
+          const collapsed = !!state[tierId];
+          if (content) content.classList.toggle('is-collapsed', collapsed);
+          if (chevron) chevron.style.transform = collapsed ? 'rotate(-90deg)' : '';
+          if (btn) {
+            btn.classList.toggle('border-b', !collapsed);
+            btn.classList.toggle('pb-1.5', !collapsed);
+            btn.classList.toggle('border-slate-800', !collapsed);
+          }
+        }
+
+        tierIds.forEach(apply);
+
+        return {
+          toggle(tierId) {
+            state[tierId] = !state[tierId];
+            localStorage.setItem(storageKey, JSON.stringify(state));
+            apply(tierId);
+          },
+          reset() {
+            state = {};
+            localStorage.removeItem(storageKey);
+            tierIds.forEach(apply);
+          }
+        };
+      }
+
+      const supportTiers = makeTierGroup(
+        'poe2_collapsed_tiers',
+        ['tier-1', 'tier-2', 'tier-3', 'tier-4', 'tier-5']
+      );
+      const skillTiers = makeTierGroup(
+        'poe2_collapsed_skill_tiers',
+        ['stier-1','stier-2','stier-3','stier-4','stier-5',
+         'stier-6','stier-7','stier-8','stier-9','stier-10']
+      );
+
+      window.toggleTier      = (id) => supportTiers.toggle(id);
+      window.toggleSkillTier = (id) => skillTiers.toggle(id);
+
+      // Gem checkboxes — shared across both columns via .gem-checkbox class.
+      function initGemCheckboxes() {
+        document.querySelectorAll('.gem-checkbox').forEach(cb => {
+          const gemId     = cb.id;
+          const parentCard = document.getElementById('card-' + gemId);
+
+          if (checkedGems.includes(gemId)) {
+            cb.checked = true;
+            if (parentCard) parentCard.classList.add('opacity-40');
+          }
+
+          const toggle = () => {
+            cb.checked = !cb.checked;
+            if (cb.checked) {
+              if (!checkedGems.includes(gemId)) checkedGems.push(gemId);
+              if (parentCard) parentCard.classList.add('opacity-40');
+            } else {
+              checkedGems = checkedGems.filter(id => id !== gemId);
+              if (parentCard) parentCard.classList.remove('opacity-40');
+            }
+            localStorage.setItem('poe2_checked_gems', JSON.stringify(checkedGems));
+          };
+
+          if (parentCard) {
+            parentCard.addEventListener('click', (e) => {
+              if (e.target !== cb) { e.preventDefault(); toggle(); }
+            });
+          }
+          cb.addEventListener('change', toggle);
+        });
+      }
+
+      // Reset — two-click confirmation.
+      let confirmTimeout;
+      const resetApp = document.getElementById('resetApp');
+      resetApp.addEventListener('click', () => {
+        if (resetApp.dataset.confirming === "true") {
+          checkedGems = [];
+          localStorage.removeItem('poe2_checked_gems');
+          supportTiers.reset();
+          skillTiers.reset();
+          document.querySelectorAll('.gem-checkbox').forEach(cb => {
+            cb.checked = false;
+            const card = document.getElementById('card-' + cb.id);
+            if (card) card.classList.remove('opacity-40');
+          });
+          resetApp.textContent = 'Progress Reset!';
+          resetApp.classList.remove('bg-red-600', 'border-red-500', 'text-white');
+          resetApp.classList.add('bg-emerald-900/40', 'border-emerald-700', 'text-emerald-400');
+          resetApp.dataset.confirming = "false";
+          setTimeout(() => {
+            resetApp.textContent = 'Reset Progress';
+            resetApp.classList.remove('bg-emerald-900/40', 'border-emerald-700', 'text-emerald-400');
+            resetApp.classList.add('bg-red-950/40', 'border-red-900/50', 'text-red-400');
+          }, 2000);
+        } else {
+          resetApp.dataset.confirming = "true";
+          resetApp.textContent = 'Confirm Reset?';
+          resetApp.classList.remove('bg-red-950/40', 'border-red-900/50', 'text-red-400');
+          resetApp.classList.add('bg-red-600', 'border-red-500', 'text-white');
+          clearTimeout(confirmTimeout);
+          confirmTimeout = setTimeout(() => {
+            resetApp.dataset.confirming = "false";
+            resetApp.textContent = 'Reset Progress';
+            resetApp.classList.remove('bg-red-600', 'border-red-500', 'text-white');
+            resetApp.classList.add('bg-red-950/40', 'border-red-900/50', 'text-red-400');
+          }, 3000);
+        }
+      });
+
+      // Copy regex — clipboard API with legacy fallback.
+      async function copyText(text) {
+        if (navigator.clipboard?.writeText) {
+          try { await navigator.clipboard.writeText(text); return true; } catch {}
+        }
+        const el = Object.assign(document.createElement('textarea'), {
+          value: text, readOnly: true
+        });
+        el.style.cssText = 'position:absolute;left:-9999px';
+        document.body.appendChild(el);
+        el.select();
+        let ok = false;
+        try { ok = document.execCommand('copy'); } catch {}
+        document.body.removeChild(el);
+        return ok;
+      }
+
+      const copyBtn = document.getElementById('copyRegexBtn');
+      if (copyBtn) {
+        copyBtn.addEventListener('click', async () => {
+          const ok = await copyText('"!(uiv)" "spear|mov|[egdl] da.* to a"');
+          if (ok) {
+            copyBtn.innerHTML = '<i data-lucide="check" class="w-4 h-4 text-emerald-400"></i>';
+            lucide.createIcons();
+            setTimeout(() => {
+              copyBtn.innerHTML = '<i data-lucide="copy" class="w-4 h-4 text-amber-500"></i>';
+              lucide.createIcons();
+            }, 2000);
+          }
+        });
+      }
+
+      initGemCheckboxes();
+    });
+  </script>
+</body>
+</html>
