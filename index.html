@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PoE 2 Huntress Spear-Twister — Guides</title>
+  <style>
+    :root {
+      --bg:         oklch(0.11 0.006 45);
+      --bg-card:    oklch(0.15 0.008 45);
+      --bg-hover:   oklch(0.18 0.010 45);
+      --border:     oklch(0.22 0.010 45);
+      --border-hover: oklch(0.35 0.025 65);
+      --text-main:  oklch(0.88 0.005 45);
+      --text-muted: oklch(0.55 0.012 45);
+      --text-dim:   oklch(0.40 0.008 45);
+      --accent:     oklch(0.75 0.14 65);
+      --accent-dim: oklch(0.55 0.10 65);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--bg);
+      color: var(--text-main);
+      font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      font-size: 0.875rem;
+      line-height: 1.5;
+      min-height: 100dvh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem 1rem;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .shell {
+      width: 100%;
+      max-width: 520px;
+    }
+
+    .wordmark {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      margin-bottom: 2rem;
+    }
+
+    .wordmark-icon {
+      width: 36px;
+      height: 36px;
+      background: var(--accent);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .wordmark-icon svg {
+      width: 18px;
+      height: 18px;
+      fill: oklch(0.11 0.006 45);
+    }
+
+    .wordmark-text h1 {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      line-height: 1;
+    }
+
+    .wordmark-text p {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      margin-top: 0.2rem;
+    }
+
+    .guide-list {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      list-style: none;
+    }
+
+    .guide-list li:first-child > a { border-radius: 8px 8px 2px 2px; }
+    .guide-list li:last-child  > a { border-radius: 2px 2px 8px 8px; }
+
+    .guide-list a {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 0.85rem 1rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      text-decoration: none;
+      color: inherit;
+      transition: background 120ms ease-out, border-color 120ms ease-out;
+    }
+
+    .guide-list a:hover {
+      background: var(--bg-hover);
+      border-color: var(--border-hover);
+    }
+
+    .guide-list a:hover .guide-arrow {
+      color: var(--accent);
+      transform: translateX(2px);
+    }
+
+    .guide-num {
+      font-size: 0.65rem;
+      font-weight: 700;
+      color: var(--accent-dim);
+      letter-spacing: 0.04em;
+      width: 1.4rem;
+      flex-shrink: 0;
+    }
+
+    .guide-body { flex: 1; min-width: 0; }
+
+    .guide-title {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--text-main);
+      line-height: 1.2;
+    }
+
+    .guide-desc {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      margin-top: 0.2rem;
+    }
+
+    .guide-arrow {
+      color: var(--text-dim);
+      flex-shrink: 0;
+      transition: color 120ms ease-out, transform 120ms ease-out;
+    }
+
+    .guide-arrow svg {
+      width: 14px;
+      height: 14px;
+      display: block;
+    }
+
+    footer {
+      margin-top: 1.75rem;
+      font-size: 0.68rem;
+      color: var(--text-dim);
+      text-align: center;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { transition-duration: 0.01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+
+    <div class="wordmark">
+      <div class="wordmark-icon">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+      </div>
+      <div class="wordmark-text">
+        <h1>Huntress Spear-Twister</h1>
+        <p>Campaign WR Speedrun — Reference Guides</p>
+      </div>
+    </div>
+
+    <ul class="guide-list">
+      <li>
+        <a href="leveling_cheat_sheet.html">
+          <span class="guide-num">01</span>
+          <div class="guide-body">
+            <div class="guide-title">Leveling Cheat Sheet</div>
+            <div class="guide-desc">Zone-by-zone priorities, flask pickups, and act checkpoints</div>
+          </div>
+          <span class="guide-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </span>
+        </a>
+      </li>
+      <li>
+        <a href="gems_cheat_sheet.html">
+          <span class="guide-num">02</span>
+          <div class="guide-body">
+            <div class="guide-title">Gems Cheat Sheet</div>
+            <div class="guide-desc">Support gem priority tiers and socket targets per act</div>
+          </div>
+          <span class="guide-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </span>
+        </a>
+      </li>
+      <li>
+        <a href="early_crafting_cheat_sheet.html">
+          <span class="guide-num">03</span>
+          <div class="guide-body">
+            <div class="guide-title">Early Crafting Cheat Sheet</div>
+            <div class="guide-desc">League-start crafting priorities, currency targets, and thresholds</div>
+          </div>
+          <span class="guide-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </span>
+        </a>
+      </li>
+      <li>
+        <a href="https://www.onlyexiles.com/guide/GDdk59VS43XbL8" target="_blank" rel="noopener noreferrer">
+          <span class="guide-num">04</span>
+          <div class="guide-body">
+            <div class="guide-title">Campaign Planner <span style="font-size:0.6rem;font-weight:500;color:var(--text-dim);letter-spacing:0.04em;text-transform:uppercase;margin-left:0.35rem;">onlyexiles.com</span></div>
+            <div class="guide-desc">Act-by-act zone sequence, gem pickups, loot filter regex, and boss notes</div>
+          </div>
+          <span class="guide-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          </span>
+        </a>
+      </li>
+    </ul>
+
+    <footer>good golly</footer>
+  </div>
+</body>
+</html>
