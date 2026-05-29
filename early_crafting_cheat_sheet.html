@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PoE 2 League Start Cheat Sheet</title>
+<style>
+  :root {
+    /* Physical scene: PoE2 grinder, dark room, 1-2am, side monitor glanced at mid-map. Dense, scannable, zero chrome waste. */
+    /* Color strategy: Restrained. Amber-tinted near-black, high-contrast gold accent for scan stops. */
+    --bg:         oklch(0.14 0.005 45);
+    --bg-alt:     oklch(0.17 0.009 45);
+    --bg-row:     oklch(0.155 0.007 45);
+    --text-main:  oklch(0.88 0.005 45);
+    --text-muted: oklch(0.57 0.012 45);
+    --accent:     oklch(0.75 0.14 65);
+    --accent-dim: oklch(0.60 0.10 65);
+    --border:     oklch(0.22 0.01 45);
+    --danger:     oklch(0.68 0.14 25);
+    --positive:   oklch(0.72 0.14 150);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background-color: var(--bg);
+    color: var(--text-main);
+    font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    font-size: 0.73rem;
+    line-height: 1.35;
+    padding: 0.45rem 0.7rem 0.45rem;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ─── Header ─────────────────────────────────────── */
+  header {
+    display: flex;
+    align-items: baseline;
+    gap: 0.6rem;
+    padding-bottom: 0.3rem;
+    margin-bottom: 0.4rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  h1 {
+    font-size: 0.92rem;
+    font-weight: 700;
+    color: var(--accent);
+    letter-spacing: -0.01em;
+    line-height: 1;
+  }
+
+  .header-sub {
+    font-size: 0.63rem;
+    color: var(--text-muted);
+  }
+
+  /* ─── Two-column grid ─────────────────────────────── */
+  .grid {
+    display: grid;
+    grid-template-columns: 56% 44%;
+    gap: 0 0.9rem;
+    max-width: 1080px;
+    align-items: start;
+  }
+
+  .col { display: flex; flex-direction: column; gap: 0.45rem; }
+
+  /* ─── Section headings ────────────────────────────── */
+  h2 {
+    font-size: 0.67rem;
+    font-weight: 700;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    padding-bottom: 0.18rem;
+    margin-bottom: 0.28rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  h3 {
+    font-size: 0.65rem;
+    font-weight: 700;
+    color: var(--accent-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-top: 0.35rem;
+    margin-bottom: 0.12rem;
+  }
+
+  /* first h3 in a section has no top margin */
+  section h3:first-of-type { margin-top: 0.1rem; }
+
+  p {
+    font-size: 0.68rem;
+    color: var(--text-muted);
+    margin-bottom: 0.15rem;
+    line-height: 1.3;
+  }
+
+  /* ─── Lists ───────────────────────────────────────── */
+  ul {
+    padding-left: 0.85rem;
+    list-style: disc;
+  }
+
+  li {
+    margin-bottom: 0.12rem;
+    font-size: 0.69rem;
+    line-height: 1.3;
+    color: var(--text-muted);
+  }
+
+  li strong {
+    color: var(--text-main);
+    font-weight: 600;
+  }
+
+  strong {
+    font-weight: 600;
+    color: var(--accent);
+  }
+
+  .danger { color: var(--danger); font-weight: 600; }
+
+  /* ─── Main tables ─────────────────────────────────── */
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.68rem;
+    margin-bottom: 0;
+  }
+
+  .data-table th {
+    text-align: left;
+    font-weight: 700;
+    color: var(--text-muted);
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 0.18rem 0.5rem 0.18rem 0;
+    border-bottom: 1px solid var(--border);
+    white-space: nowrap;
+  }
+
+  .data-table   td {
+    padding: 0.22rem 0.5rem 0.22rem 0;
+    border-bottom: 1px solid var(--bg-alt);
+    vertical-align: top;
+    line-height: 1.3;
+    color: var(--text-muted);
+  }
+
+  .data-table td:nth-child(2) {
+    color: var(--text-main);
+    font-weight: 500;
+  }
+
+  .data-table tbody tr:nth-child(even) td {
+    background-color: var(--bg-row);
+  }
+
+  .data-table td:first-child {
+    font-weight: 600;
+    color: var(--text-main);
+    white-space: nowrap;
+    padding-right: 0.6rem;
+  }
+
+  .tag {
+    display: inline-block;
+    background-color: var(--bg-alt);
+    color: var(--accent);
+    padding: 0.04rem 0.22rem;
+    border-radius: 2px;
+    font-family: ui-monospace, Menlo, Consolas, monospace;
+    font-size: 0.62rem;
+    font-weight: 700;
+    line-height: 1.4;
+    margin-right: 0.1rem;
+  }
+
+  .tier-sub {
+    display: block;
+    font-size: 0.6rem;
+    color: var(--text-muted);
+    font-weight: 400;
+    line-height: 1.2;
+    margin-top: 0.06rem;
+  }
+
+  /* ─── iLvl section ────────────────────────────────── */
+  .ilvl-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.35rem 0.6rem;
+  }
+
+  .ilvl-block-label {
+    font-size: 0.6rem;
+    font-weight: 700;
+    color: var(--accent-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.1rem;
+    display: block;
+  }
+
+  .ilvl-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: ui-monospace, Menlo, Consolas, monospace;
+    font-size: 0.66rem;
+  }
+
+  .ilvl-table th {
+    text-align: left;
+    font-size: 0.55rem;
+    color: var(--text-muted);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    padding: 0.06rem 0.25rem 0.1rem 0;
+    border-bottom: 1px solid var(--border);
+    font-family: ui-sans-serif, system-ui, sans-serif;
+    white-space: nowrap;
+  }
+
+  .ilvl-table td {
+    padding: 0.09rem 0.25rem 0.09rem 0;
+    border-bottom: 1px solid var(--bg-alt);
+    color: var(--text-muted);
+    line-height: 1.25;
+  }
+
+  .ilvl-table tbody tr:nth-child(even) td {
+    background-color: var(--bg-row);
+  }
+
+  .ilvl-table td:first-child {
+    color: var(--text-main);
+    font-weight: 700;
+    width: 2rem;
+  }
+
+  .ilvl-val {
+    color: var(--positive);
+    font-weight: 700;
+    width: 2rem;
+  }
+
+  .ilvl-pct {
+    color: var(--text-muted);
+    font-size: 0.62rem;
+  }
+</style>
+</head>
+<body>
+  <header>
+    <h1>PoE 2 League Start Reference</h1>
+    <span class="header-sub">side monitor cheatsheet</span>
+  </header>
+
+  <div class="grid">
+
+    <!-- LEFT COLUMN -->
+    <div class="col">
+
+      <section>
+        <h2>1. Investments: Beating Inflation</h2>
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Stage</th>
+              <th>Target Item</th>
+              <th>Market Logic</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Entry</td>
+              <td>Omen of Abyssal Echoes</td>
+              <td>Cheap early. Demand rises as they get paired with Omen of Light late.</td>
+            </tr>
+            <tr>
+              <td>Mid–High</td>
+              <td>Omen of Light &amp; Whittling</td>
+              <td>Heavy use in high-tier crafting. Mirror-tier groups hoard these. Buy heavily.</td>
+            </tr>
+            <tr>
+              <td>Long-term</td>
+              <td>Hinakora's Lock</td>
+              <td>Dirt cheap early. Skyrockets late when players corrupt or sanctify mirror items.</td>
+            </tr>
+            <tr>
+              <td>Endgame</td>
+              <td>Mirror of Kalandra</td>
+              <td>Liquidate omens and locks to buy your mirror outright once savings allow.</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section>
+        <h2>3. Bases, Map Tiers &amp; iLevels</h2>
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th style="width:18%">Tier / Level</th>
+              <th style="width:28%">Bases to Hunt</th>
+              <th>Key Modifiers Unlocked</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="tag">T1</span> Lvl 65<span class="tier-sub">Ancient Waystones</span></td>
+              <td>Boots, Helmets, Gloves</td>
+              <td>Movement speed (Boots); +2 minion/crit chance (Helmets); +2 melee crit/atk speed (Gloves).</td>
+            </tr>
+            <tr>
+              <td><span class="tag">T7</span> Lvl 71<span class="tier-sub">Refined Waystone 2</span></td>
+              <td>Belts, Armors, Rings</td>
+              <td>Up to 40% resistances. Higher tier defensive stats on body armors.</td>
+            </tr>
+            <tr>
+              <td><span class="tag">T11</span> Lvl 75<span class="tier-sub">Pristine Waystone 1</span></td>
+              <td>Rings, Gloves, Amulets, Weapons</td>
+              <td>Max flat damage. +3 to all spell/minion/proj/melee skills (Amulets). Near-max dmg on martial weapons.</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section>
+        <h2>5. Weapon iLvl Requirements</h2>
+        <div class="ilvl-grid">
+
+          <div>
+            <span class="ilvl-block-label">Flat Phys</span>
+            <table class="ilvl-table">
+              <thead><tr><th>Tier</th><th>iLvl</th><th>Pfx%</th></tr></thead>
+              <tbody>
+                <tr><td>T9</td><td class="ilvl-val">1</td><td class="ilvl-pct">2.24%</td></tr>
+                <tr><td>T8</td><td class="ilvl-val">8</td><td class="ilvl-pct">2.24%</td></tr>
+                <tr><td>T7</td><td class="ilvl-val">16</td><td class="ilvl-pct">2.24%</td></tr>
+                <tr><td>T6</td><td class="ilvl-val">33</td><td class="ilvl-pct">2.24%</td></tr>
+                <tr><td>T5</td><td class="ilvl-val">46</td><td class="ilvl-pct">2.24%</td></tr>
+                <tr><td>T4</td><td class="ilvl-val">54</td><td class="ilvl-pct">1.34%</td></tr>
+                <tr><td>T3</td><td class="ilvl-val">60</td><td class="ilvl-pct">0.90%</td></tr>
+                <tr><td>T2</td><td class="ilvl-val">65</td><td class="ilvl-pct">0.45%</td></tr>
+                <tr><td>T1</td><td class="ilvl-val">75</td><td class="ilvl-pct">0.22%</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div>
+            <span class="ilvl-block-label">Flat Ele <span style="font-weight:400;text-transform:none;letter-spacing:0">(fire/cold same breakpoints)</span></span>
+            <table class="ilvl-table">
+              <thead><tr><th>Tier</th><th>iLvl</th><th>Pfx%</th></tr></thead>
+              <tbody>
+                <tr><td>T10</td><td class="ilvl-val">1</td><td class="ilvl-pct">2.02%</td></tr>
+                <tr><td>T9</td><td class="ilvl-val">8</td><td class="ilvl-pct">2.02%</td></tr>
+                <tr><td>T8</td><td class="ilvl-val">16</td><td class="ilvl-pct">2.02%</td></tr>
+                <tr><td>T7</td><td class="ilvl-val">33</td><td class="ilvl-pct">2.02%</td></tr>
+                <tr><td>T6</td><td class="ilvl-val">46</td><td class="ilvl-pct">2.02%</td></tr>
+                <tr><td>T5</td><td class="ilvl-val">54</td><td class="ilvl-pct">2.02%</td></tr>
+                <tr><td>T4</td><td class="ilvl-val">60</td><td class="ilvl-pct">1.21%</td></tr>
+                <tr><td>T3</td><td class="ilvl-val">65</td><td class="ilvl-pct">0.81%</td></tr>
+                <tr><td>T2</td><td class="ilvl-val">75</td><td class="ilvl-pct">0.50%</td></tr>
+                <tr><td>T1</td><td class="ilvl-val">81</td><td class="ilvl-pct">0.20%</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div>
+            <span class="ilvl-block-label">IPD Phys <span style="font-weight:400;text-transform:none;letter-spacing:0">(% increased phys dmg)</span></span>
+            <table class="ilvl-table">
+              <thead><tr><th>Tier</th><th>iLvl</th><th>Pfx%</th></tr></thead>
+              <tbody>
+                <tr><td>T8</td><td class="ilvl-val">1</td><td class="ilvl-pct">2.24%</td></tr>
+                <tr><td>T7</td><td class="ilvl-val">8</td><td class="ilvl-pct">2.24%</td></tr>
+                <tr><td>T6</td><td class="ilvl-val">16</td><td class="ilvl-pct">2.24%</td></tr>
+                <tr><td>T5</td><td class="ilvl-val">33</td><td class="ilvl-pct">0.90%</td></tr>
+                <tr><td>T4</td><td class="ilvl-val">46</td><td class="ilvl-pct">0.45%</td></tr>
+                <tr><td>T3</td><td class="ilvl-val">60</td><td class="ilvl-pct">0.22%</td></tr>
+                <tr><td>T2</td><td class="ilvl-val">75</td><td class="ilvl-pct">0.11%</td></tr>
+                <tr><td>T1</td><td class="ilvl-val">82</td><td class="ilvl-pct">0.06%</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div>
+            <span class="ilvl-block-label">IPD Ele <span style="font-weight:400;text-transform:none;letter-spacing:0">(% increased ele dmg w/ attacks)</span></span>
+            <table class="ilvl-table">
+              <thead><tr><th>Tier</th><th>iLvl</th><th>Pfx%</th></tr></thead>
+              <tbody>
+                <tr><td>T6</td><td class="ilvl-val">4</td><td class="ilvl-pct">1.12%</td></tr>
+                <tr><td>T5</td><td class="ilvl-val">16</td><td class="ilvl-pct">1.12%</td></tr>
+                <tr><td>T4</td><td class="ilvl-val">33</td><td class="ilvl-pct">1.12%</td></tr>
+                <tr><td>T3</td><td class="ilvl-val">46</td><td class="ilvl-pct">1.12%</td></tr>
+                <tr><td>T2</td><td class="ilvl-val">60</td><td class="ilvl-pct">1.12%</td></tr>
+                <tr><td>T1</td><td class="ilvl-val">81</td><td class="ilvl-pct">1.12%</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+        </div>
+      </section>
+
+    </div>
+
+    <!-- RIGHT COLUMN -->
+    <div class="col">
+
+      <section>
+        <h2>2. Early Crafting Materials</h2>
+
+        <h3>Blue Currencies</h3>
+        <ul>
+          <li><strong>Transmutations &amp; Augmentations:</strong> Spam on every good base: make it magic, get two stats.</li>
+          <li><strong>Regal Orbs:</strong> Upgrade magic → rare only when both mods are already desirable.</li>
+        </ul>
+
+        <h3>Essences</h3>
+        <ul>
+          <li><strong>Sorcery &amp; Battle:</strong> +2 skills to wands/staffs and martial weapons. Only on bases with high existing spell or phys damage.</li>
+          <li><strong>Thawing / Insulation / Electricity / Ruin:</strong> cold / fire / lightning / chaos res. Only on belts with high life/res, or boots with 30% move speed.</li>
+        </ul>
+
+        <h3>Putrifactions (Omen of Putrifaction)</h3>
+        <p>6 unrevealed mods, 3 choices each. No Exalted Orbs needed. Add sockets and quality before using.</p>
+        <ul>
+          <li><strong>Preserved Rib:</strong> Armor pieces: best on Boots, Body Armors, Gloves.</li>
+          <li><strong>Preserved Collarbone:</strong> Jewelry: best on Rings and Quivers.</li>
+          <li><span class="danger">Avoid:</span> Preserved Jawbones (Weapons) or any putrifaction on Belts: results are historically terrible.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>4. Mod Modifier Hierarchy</h2>
+        <ul>
+          <li><strong>Priority 1: Exclusive mods:</strong> Base-specific power first: Move Speed on boots, +Skills on amulets.</li>
+          <li><strong>Priority 2: Resistances:</strong> Any roll ≥30% is acceptable for early mapping.</li>
+          <li><strong>Priority 3: Defenses:</strong> Match base type: Armor (STR) / Evasion (DEX) / Energy Shield (INT).</li>
+          <li><strong>Wands &amp; Staffs:</strong> High base spell damage + +2 to skills.</li>
+          <li><strong>Martial Weapons:</strong> High base phys damage + max flat rolls (T11+) + +2 to all attack skills.</li>
+        </ul>
+      </section>
+
+    </div>
+
+  </div>
+</body>
+</html>
